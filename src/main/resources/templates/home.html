@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<div th:replace="~{base :: head('Webapp Finanças Pessoais')}"></div>
+	<script th:inline="javascript">
+		token = /*[[${token}]]*/
+		ano = /*[[${ano}]]*/ 
+		mes = /*[[${mes}]]*/
+	</script>
+</head>
+<body onload="onLoad()">
+
+    <div th:replace="~{base :: titulo(${titulo})}" }></div>
+    
+	<div th:replace="~{views/homeView}"></div>
+		
+	<script src="/js/main.js"></script>
+	<script src="/js/googleChart.js"></script>
+</body>
+</html>

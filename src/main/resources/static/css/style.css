@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+.logo-container {
+	background-color: #008040;
+	color: #FFF;
+}
+
+.logo {
+	font-family: 'Handlee', cursive;
+	font-size: 2.5rem
+}
+
+.display-4 {
+	font-family: 'Handlee', cursive;
+}
+
+.error-message {
+	color: #ff0000;
+}
+
+#login-form {
+	width: 400px;
+}
+
+#cadastro-form {
+	width: 600px;
+}
+
+.lista-registros {
+	min-width: 28rem;
+}
+
+.card-link {
+	font-size: 1.2rem;
+}
+
+#campo-valor {
+	min-width: 9.5rem;
+}
+
+#campo-descricao {
+	min-width: 15.5rem;
+}
+
+.valor-resumo {
+	font-family: cabin, sans-serif;
+	padding-top: 0.4rem;
+	padding-bottom: 0.5rem;
+	font-size: 1.25rem;
+	text-align-last: center;
+}
+
+.texto-registro {
+	font-family: cabin, sans-serif;
+	padding-top: 0.9rem;
+	font-size: 1.2rem;
+}
+
+.valor-registro {
+	text-align: right;
+}
+
+.descricao-registro {
+	text-align: left;
+}
+
+#myChartGoogle {
+	width: 100%;
+	min-width: 50rem;
+	height: 700px;
+}

@@ -1,0 +1,23 @@
+
+ <div class="card-row col-5" id="receitas">
+            <div class="card">
+            <div class="card-body">
+                    <a href="#" class="card-link">
+                    	Nova Receita
+                    </a>
+                    <a href="#" class="card-link">
+                    	Editar Receitas
+                    </a>
+                </div>
+                <div class="card-header alert-success">
+                    <h1>
+                        Receitas
+                    </h1>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li v-for="receita in receitas" class="list-group-item bg-light">
+                    <h5 class="card-title">R$ {{receita.valor}} - {{receita.descricao}}</h5>
+                    </li>
+                </ul>
+            </div>
+</div>

@@ -1,0 +1,34 @@
+<div th:fragment="cadastro" class="card mt-3" id="cadastro-form">
+    <form th:object="${usuarioForm}" class="card-body" th:action="@{/login/cadastro}" method="POST">
+
+        <div th:if="${exception}" class="mb-2">
+            <small th:text="${exception}" class="error-message"></small>
+        </div>
+
+        <div class="form-group">
+            <label for="nome">Informe seu e-mail</label>
+            <input th:field="*{email}" class="form-control" th:errorclass="is-invalid" placeholder="e-mail" />
+	            <div  th:errors="*{email}" class="invalid-feedback">
+	                Erros do nome do nome de usuario
+	            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="nome">Informe seu nome</label>
+            <input th:field="*{nome}" class="form-control" th:errorclass="is-invalid" placeholder="nome" />
+            <div th:errors="*{nome}" class="invalid-feedback">
+                Erros do nome do nome de usuario
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input th:field="*{senha}" type="password" class="form-control" th:errorclass="is-invalid"
+                placeholder="senha" />
+            <div th:errors="*{senha}" class="invalid-feedback">
+                Erros da senha
+            </div>
+        </div>
+        <button  class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
+</div>

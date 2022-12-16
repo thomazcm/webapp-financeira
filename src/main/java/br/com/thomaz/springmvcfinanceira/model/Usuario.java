@@ -3,24 +3,30 @@ package br.com.thomaz.springmvcfinanceira.model;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
-@Table(name = "users")
+@Document(collection = "users")
 public class Usuario implements UserDetails {
+    
     private static final long serialVersionUID = 1L;
+    @Id 
+    private String id;
+    
+    public String getId() {
+        return id;
+    }
 
-    @Id private String email;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String email;
     private String nome;
-    @JsonIgnore @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Collection<Perfil> perfis = new ArrayList<>();
     @JsonIgnore private String senha;
     @JsonIgnore private String token;

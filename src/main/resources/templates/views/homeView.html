@@ -1,62 +1,24 @@
-<div th:fragment="cardsRegistros" class="container-fluid" id="registros">
+<div class="jumbotron" id="titulo-home" style="margin-bottom:0rem">
+    <h1 class="display-4" th:text="${mesNome}+' '+${ano}"></h1>
+</div>
+
+<div th:replace="~{views/navbar-meses}"></div>
+
+<div th:fragment="cardsRegistros" id="registros" class="container-fluid">
+
     <div class="row">
-        <div class="row col order-2 order-xl-1">
-            <div class="card-row col lista-registros" id="receitas">
-                <div class="card">
-
-                    <div class="card-body">
-                        <a href="#" class="card-link"> Nova Receita </a>
-                        <a href="#" class="card-link"> Editar Receitas </a>
-                    </div>
-
-                    <div class="card-header alert-success">
-                        <h1>Receitas</h1>
-                    </div>
-                    <div v-for="receita in receitas" class="card-group">
-                        <div class="card col-4 bg-light" id="campo-valor">
-                            <p class="texto-registro valor-registro" >R$ {{receita.valor}}</p>
-                        </div>
-                        <div class="card col-8 bg-light" id="campo-descricao">
-                            <p class="texto-registro descricao-registro">{{receita.descricao}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-row col lista-registros" id="despesas">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="#" class="card-link"> Nova Despesa </a>
-                        <a href="#" class="card-link"> Editar Despesas </a>
-                    </div>
-
-                    <div class="card-header alert-danger">
-                        <h1>Despesas</h1>
-                    </div>
-                    <div v-for="despesa in despesas" class="card-group">
-                        <div class="card col-4 bg-light" id="campo-valor">
-                            <p class="texto-registro valor-registro">R$ {{despesa.valor}}</p>
-                        </div>
-                        <div class="card col-8 bg-light" id="campo-descricao">
-                            <p class="texto-registro descricao-registro">{{despesa.descricao}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    	<div class="col-12 col-xl-7 card-resumo" id="resumo" :key="resumoKey">
+            <div th:replace="~{cards/card-resumo}"></div>
         </div>
-        <div class="card-row col order-1 order-lg-2" id="resumo" style="min-width: 61rem">
-            <div class="card">
-                <div class="card-header alert-info">
-                    <h1> Resumo do Mês </h1>
-                </div>
-                <div class="card-group">
-                    <div class="card bg-light" v-for="valor in valoresResumo">
-                        <p class="card-text valor-resumo"> {{valor}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div id="myChartGoogle"></div>
-            </div>
-        </div>
-    </div>
+        
+   		<div class="col-12 col-xl row order-lg-first" id="col-registros"> 
+		        <div  class="col-12 col-lg-6 col-xl-12" id="receitas" :key="receitasKey">
+		            <div th:replace="~{cards/card-receitas}"></div>
+		        </div>
+		        
+		    	<div class="col-12 col-lg-6 col-xl-12" id="despesas" :key="despesasKey">
+		            <div th:replace="~{cards/card-despesas}"></div>
+		        </div>
+   		</div>
+   </div>
 </div>

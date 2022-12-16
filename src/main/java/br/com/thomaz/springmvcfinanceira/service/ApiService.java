@@ -11,20 +11,17 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ApiService {
 
-    @Value("${endpoint.apiEndpoint}")
+    @Value("${webapp-financeira.endpoint.apiEndpoint}")
     private String apiEndpoint;
 
     @Autowired private JsonService json;
     @Autowired private HttpClient client;
-    
     
     public HttpResponse<String> doRequest(HttpMethod method, String endpoint) {
         return doRequest(method, endpoint, null);

@@ -6,10 +6,12 @@ public class UsuarioDto {
 
     private String email;
     private String senha;
+    private String nome;
     
     public UsuarioDto(Usuario usuario) {
         this.email = usuario.getUsername();
         this.senha = usuario.getPassword();
+        this.nome = usuario.getNome();
     }
 
     public String getEmail() {
@@ -18,6 +20,10 @@ public class UsuarioDto {
 
     public String getSenha() {
         return senha;
+    }
+
+    public String getNome() {
+        return nome;
     }
     
 }

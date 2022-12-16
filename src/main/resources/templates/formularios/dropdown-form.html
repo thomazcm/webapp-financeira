@@ -1,0 +1,91 @@
+<div class="dropdown-form p-2" th:fragment="receitas">
+    <form @submit.prevent>
+        <fieldset>
+            <legend class="titulo-formulario">Nova Receita</legend>
+
+            <p>
+            	<div>
+	                <label for="input">Descrição</label>
+	                <input type="text" autofocus="autofocus" id="input" v-model="receitaForm.descricao"
+	                v-bind:class="{'is-invalid':receitaForm.errors.descricao !== ''}" >
+		            <div v-if="receitaForm.errors.descricao" class="invalid-feedback">
+		            	{{receitaForm.errors.descricao}}
+		           	</div>
+            	</div>
+            </p>
+
+            <p>
+            	<div>
+	                <label for="input">Valor</label>
+	                <input type="number" id="input" v-model="receitaForm.valor" placeholder="R$"
+	                v-bind:class="{'is-invalid':receitaForm.errors.valor !== ''}" >
+	                <div v-if="receitaForm.errors.valor" class="invalid-feedback">
+		            	{{receitaForm.errors.valor}}
+		           	</div>
+            	</div>
+            </p>
+
+            <p>
+            <div>
+                <label for="date">Data</label>
+                <input type="date" id="date" v-model="receitaForm.data" 
+                v-bind:class="{'is-invalid':receitaForm.errors.data !== ''}">
+                <div v-if="receitaForm.errors.data" class="invalid-feedback">
+                    {{receitaForm.errors.data}}
+                </div>
+            </div>
+            </p>
+
+            <button v-on:click="novaReceita(receitaForm)" class="btn btn-primary" 
+            type="submit">Salvar</button>
+        </fieldset>
+    </form>
+</div>
+
+<div class="dropdown-form p-2" th:fragment="despesas">
+    <form @submit.prevent>
+        <fieldset>
+            <legend class="titulo-formulario">Nova Despesa</legend>
+
+            <p>
+            <div>
+                <label for="input">Descrição</label>
+                <input type="text" autofocus="autofocus" id="input" v-model="despesaForm.descricao"
+                    v-bind:class="{'is-invalid':despesaForm.errors.descricao !== ''}">
+                <div v-if="despesaForm.errors.descricao" class="invalid-feedback">
+                    {{despesaForm.errors.descricao}}
+                </div>
+            </div>
+            </p>
+
+            <p>
+            <div>
+                <label for="input">Valor</label>
+                <input type="number" id="input" v-model="despesaForm.valor" placeholder="R$"
+                    v-bind:class="{'is-invalid':despesaForm.errors.valor !== ''}">
+                <div v-if="despesaForm.errors.valor" class="invalid-feedback">
+                    {{despesaForm.errors.valor}}
+                </div>
+            </div>
+            </p>
+
+            <select class="custom-select mb-3" v-model="despesaForm.categoria">
+                <option selected>Selecione a Categoria</option>
+                <option v-for="categoria in listaDeCategorias">{{categoria}}</option>
+            </select>
+
+            <p>
+            <div>
+                <label for="date">Data</label>
+                <input type="date" id="date" v-model="despesaForm.data" 
+                v-bind:class="{'is-invalid':despesaForm.errors.data !== ''}">
+                <div v-if="despesaForm.errors.data" class="invalid-feedback">
+                    {{despesaForm.errors.data}}
+                </div>
+            </div>
+            </p>
+
+            <button v-on:click="novaDespesa(despesaForm)" class="btn btn-primary" >Salvar</button>
+        </fieldset>
+    </form>
+</div>

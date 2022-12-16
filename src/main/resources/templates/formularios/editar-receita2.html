@@ -1,0 +1,44 @@
+<div class="ml-3 mb-3" th:fragment="editar-receita">
+    <form @submit.prevent>
+        <fieldset>
+            <p>
+            	<div>
+	                <label for="input">Descrição</label>
+	                <input type="text" autofocus="autofocus" id="input" v-model="receitaEditForm.descricao"
+	                v-bind:class="{'is-invalid':receitaEditForm.errors.descricao !== ''}" >
+		            <div v-if="receitaEditForm.errors.descricao" class="invalid-feedback">
+		            	{{receitaEditForm.errors.descricao}}
+		           	</div>
+            	</div>
+            </p>
+
+            <p>
+            	<div>
+	                <label for="input">Valor</label>
+	                <input type="number" id="input" v-model="receitaEditForm.valor" placeholder="R$"
+	                v-bind:class="{'is-invalid':receitaEditForm.errors.valor !== ''}" >
+	                <div v-if="receitaEditForm.errors.valor" class="invalid-feedback">
+		            	{{receitaEditForm.errors.valor}}
+		           	</div>
+            	</div>
+            </p>
+
+            <p>
+		    <div>
+		        <label for="date">Data</label>
+		        <input type="date" id="date" v-model="receitaEditForm.data" 
+		        v-bind:class="{'is-invalid':receitaEditForm.errors.data !== ''}">
+		        <div v-if="receitaEditForm.errors.data" class="invalid-feedback">
+		            {{receitaEditForm.errors.data}}
+		        </div>
+		    </div>
+		    </p>
+
+            <button v-on:click="editarReceita(receitaEditForm, receita.id)" class="btn btn-primary"
+            type="submit">
+            	Salvar
+           	</button>
+           	<button type="button" class="btn btn-secondary btn-sm" v-on:click="cancelarEdicao()">Cancelar</button>
+        </fieldset>
+    </form>
+</div>

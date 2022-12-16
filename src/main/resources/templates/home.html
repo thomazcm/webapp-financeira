@@ -5,20 +5,27 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<div th:replace="~{base :: head('Webapp Finanças Pessoais')}"></div>
 	<script th:inline="javascript">
-		token = /*[[${token}]]*/
 		ano = /*[[${ano}]]*/ 
 		mes = /*[[${mes}]]*/
+		mesAnteriorUrl = /*[[${mesAnteriorUrl}]]*/
+		proximoMesUrl = /*[[${proximoMesUrl}]]*/
+		mesAnteriorNome = /*[[${mesAnteriorNome}]]*/
+		proximoMesNome = /*[[${proximoMesNome}]]*/
+		titulo = /*[[${titulo}]]*/
+		mesNome = /*[[${mesNome}]]*/
+		listaMeses = /*[[${listaMeses}]]*/
+		listaAnos = /*[[${listaAnos}]]*/
+		listaCategorias = /*[[${listaCategorias}]]*/
 	</script>
 </head>
 <body onload="onLoad()">
 
-    <div th:replace="~{base :: titulo(${titulo})}" }></div>
-    
-	<div th:replace="~{views/homeView}"></div>
+	    <div class="container-fluid" th:replace="~{base :: header}" }></div>
+		<div  class="container-fluid" th:replace="~{views/homeView}"></div>
 		
 	<script src="/js/main.js"></script>
-	<script src="/js/googleChart.js"></script>
 </body>
 </html>

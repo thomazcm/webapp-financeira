@@ -24,15 +24,16 @@ public class SecurityConfigurations {
 
             http
                 .authorizeRequests()
-                .antMatchers("/sanity/**", "/h2-console/**", "/login/**","/js/**","/css/**").permitAll()
+                .antMatchers("/h2-console/**", "/login/**","/logout/**","/js/**","/css/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .csrf().disable()
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/home", true)
-                        .failureUrl("/login?loginFail=true")
+                        .defaultSuccessUrl("/login/redirect", true)
+                        .failureUrl("/login?loginFail=1")
                         .permitAll())
                 .logout(logout -> logout.logoutUrl("/logout"))
                 .headers().frameOptions().sameOrigin();

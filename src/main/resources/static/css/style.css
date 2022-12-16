@@ -1,5 +1,49 @@
 @charset "UTF-8";
 
+#titulo-home {
+	max-height: 11rem;
+}
+
+.anos-dropdown {
+    font-size: 1.15rem;
+    font-weight: bold;
+}
+
+.mesAtual {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+#mesLista{
+	margin-top: 3px;
+    padding-right: 0rem;
+    padding-left: 0rem;
+}
+
+#col-registros {
+    padding-right: 0px;
+   	margin-left: -4px;
+   	min-width: 480px;
+}
+
+
+.card-resumo {
+	min-width: 480px;
+}
+
+#myChartGoogle {
+	height: 30rem;
+}
+
+.valor-resumo {
+	font-family: cabin, sans-serif;
+	padding-top: 0.4rem;
+	padding-bottom: 0.5rem;
+	font-size: 1.15rem;
+	text-align-last: center;
+}
+
+
 .logo-container {
 	background-color: #008040;
 	color: #FFF;
@@ -10,12 +54,12 @@
 	font-size: 2.5rem
 }
 
-.display-4 {
-	font-family: 'Handlee', cursive;
+.ano-atual {
+	background-color: lightgrey;
 }
 
-.error-message {
-	color: #ff0000;
+.display-4 {
+	font-family: 'Handlee', cursive;
 }
 
 #login-form {
@@ -26,46 +70,54 @@
 	width: 600px;
 }
 
-.lista-registros {
-	min-width: 28rem;
+.error-message {
+	color: #ff0000;
 }
 
-.card-link {
-	font-size: 1.2rem;
+.header-tabela-receitas {
+	background-color: #c3e6cb;
 }
 
-#campo-valor {
-	min-width: 9.5rem;
+.header-tabela-despesas {
+	background-color: #e0a8ad;
 }
 
-#campo-descricao {
-	min-width: 15.5rem;
+.titulo-formulario {
+	text-align: center;
 }
 
-.valor-resumo {
-	font-family: cabin, sans-serif;
-	padding-top: 0.4rem;
-	padding-bottom: 0.5rem;
-	font-size: 1.25rem;
-	text-align-last: center;
+.texto-tabela {
+	font-size: 1.15rem;
 }
 
 .texto-registro {
 	font-family: cabin, sans-serif;
-	padding-top: 0.9rem;
-	font-size: 1.2rem;
+	text-align: center;
 }
 
-.valor-registro {
-	text-align: right;
+.texto-menor {
+	font-size: 1.05rem;
+}
+
+.dropdown-form {
+	min-width: 15rem;
 }
 
 .descricao-registro {
 	text-align: left;
 }
 
-#myChartGoogle {
-	width: 100%;
-	min-width: 50rem;
-	height: 700px;
+.valor-registro {
+	text-align: right;
+}
+
+.select-categoria {
+	max-width: 20rem;
+}
+
+.botoes-editar-excluir {
+	width: 8rem;
+	text-align: center;
+	padding-left: 0;
+	padding-right: 0;
 }

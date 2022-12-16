@@ -16,6 +16,7 @@ import br.com.thomaz.springmvcfinanceira.controller.dto.UsuarioDto;
 import br.com.thomaz.springmvcfinanceira.controller.form.UsuarioForm;
 import br.com.thomaz.springmvcfinanceira.repository.UsuarioRepository;
 import br.com.thomaz.springmvcfinanceira.service.ApiService;
+import br.com.thomaz.springmvcfinanceira.service.TokenService;
 
 @Controller
 @RequestMapping(("/login"))
@@ -24,14 +25,24 @@ public class LoginController {
     @Autowired private UsuarioRepository repository;
     @Autowired private BCryptPasswordEncoder encoder;
     @Autowired private ApiService http;
+    @Autowired private TokenService tokenService;
 
     @GetMapping
-    public String loginPage(Model model, @RequestParam(required = false) Boolean cadastrado,
-            @RequestParam(required = false) Boolean loginFail) {
+    public String loginPage(Model model, 
+            @RequestParam(required = false) Boolean cadastrado,
+            @RequestParam(required = false) Boolean loginFail,
+            @RequestParam(required = false) Boolean erroToken) {
         
         model.addAttribute("cadastrado", cadastrado);
         model.addAttribute("loginFail", loginFail);
+        model.addAttribute("erroToken", erroToken);
         return "login";
+    }
+    
+    @GetMapping("/redirect")
+    public String loginRedirect(Model model) {
+        model.addAttribute("token", tokenService.getToken());
+        return "loginRedirect";
     }
 
     @GetMapping("/cadastro")

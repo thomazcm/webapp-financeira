@@ -13,6 +13,7 @@ import br.com.thomaz.springmvcfinanceira.repository.UsuarioRepository;
 public class AutenticacaoService implements UserDetailsService{
     
     private UsuarioRepository repository;
+    
     @Autowired
     public AutenticacaoService(UsuarioRepository repository) {
         this.repository = repository;

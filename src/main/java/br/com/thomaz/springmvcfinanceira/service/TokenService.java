@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import br.com.thomaz.springmvcfinanceira.config.exception.ErroAoGerarTokenDeAcessoException;
 import br.com.thomaz.springmvcfinanceira.config.exception.ErroDeSessaoException;
 import br.com.thomaz.springmvcfinanceira.controller.dto.UsuarioDto;
 import br.com.thomaz.springmvcfinanceira.model.Usuario;
@@ -23,11 +24,17 @@ public class TokenService {
     }
 
     private String refreshToken(Usuario usuario) {
-        String responseBody = http.doRequest(HttpMethod.POST, "/auth", new UsuarioDto(usuario)).body();
-        String token =  responseBody.substring(10, responseBody.indexOf("\",\""));
-        usuario.setToken(token);
-        repository.save(usuario);
-        return token;
+        var response = http.doRequest(HttpMethod.POST, "/auth", new UsuarioDto(usuario));
+        try {
+            String token = response.body().substring(10, response.body().indexOf("\",\""));
+            usuario.setToken(token);
+            repository.save(usuario);
+            return token;
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            throw new ErroAoGerarTokenDeAcessoException();
+        }
+        
     }
 
     private Usuario buscarUsuarioLogado() {

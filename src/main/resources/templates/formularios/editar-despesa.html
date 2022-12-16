@@ -1,0 +1,49 @@
+ <div class="ml-3 mb-3" th:fragment="editar-despesa">
+    <form @submit.prevent>
+        <fieldset>
+            <p>
+            	<div>
+	                <label for="input">Descrição</label>
+	                <input type="text" autofocus="autofocus" id="input" v-model="despesaEditForm.descricao"
+	                v-bind:class="{'is-invalid':despesaEditForm.errors.descricao !== ''}" >
+		            <div v-if="despesaEditForm.errors.descricao" class="invalid-feedback">
+		            	{{despesaEditForm.errors.descricao}}
+		           	</div>
+            	</div>
+            </p>
+
+            <p>
+            	<div>
+	                <label for="input">Valor</label>
+	                <input type="number" id="input" v-model="despesaEditForm.valor" placeholder="R$"
+	                v-bind:class="{'is-invalid':despesaEditForm.errors.valor !== ''}" >
+	                <div v-if="despesaEditForm.errors.valor" class="invalid-feedback">
+		            	{{despesaEditForm.errors.valor}}
+		           	</div>
+            	</div>
+            </p>
+        
+        <select class="custom-select mb-3 select-categoria" v-model="despesaEditForm.categoria">
+            <option selected>Selecione a Categoria</option>
+            <option v-for="categoria in listaDeCategorias">{{categoria}}</option>
+        </select>
+
+        <p>
+	    <div>
+	        <label for="date">Data</label>
+	        <input type="date" id="date" v-model="despesaEditForm.data" 
+	        v-bind:class="{'is-invalid':despesaEditForm.errors.data !== ''}">
+	        <div v-if="despesaEditForm.errors.data" class="invalid-feedback">
+	            {{despesaEditForm.errors.data}}
+	        </div>
+	    </div>
+	    </p>
+
+        <button v-on:click="editarDespesa(despesaEditForm, despesa.id)" 
+        class="btn btn-primary" type="submit">
+            Salvar
+         </button>
+        <button type="button" class="btn btn-secondary btn-sm" v-on:click="cancelarEdicao()">Cancelar</button>
+    </fieldset>
+</form>
+</div>

@@ -1,0 +1,55 @@
+<div  th:fragment="card-receitas" class="mt-2">
+ <div class="card-header alert-success d-flex justify-content-between"> 
+ 	 <div class="dropdown">
+	      <button class="btn btn-success dropdown-toggle mt-2" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+	          aria-haspopup="true" aria-expanded="false" v-on:click="botaoNovaReceita()"> Nova Receita </button>
+	
+	      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+	          <div th:replace="~{formularios/dropdown-form :: receitas}"></div>
+	     </div>
+	  </div>
+	  
+      <h1 class="mr-2">Receitas</h1>
+      
+	  <button type="button" v-if="!mostrarBotaoEdicao" v-on:click="botaoEdicao(true)"
+        class="btn btn-warning" style="height: 3rem;">&#9998</button>
+      <button type="button" v-else class="btn btn-secondary"  v-on:click="botaoEdicao(false)">
+          Cancelar
+      </button>
+  </div>
+ 
+	<table class="table table-bordered bg-light texto-tabela" :key="receitasListaKey"
+									v-bind:class="{'texto-menor':mostrarBotaoEdicao}">
+		  <thead>
+		    <tr class="header-tabela-receitas">
+		      <th scope="col" class="texto-registro valor-registro" >Valor</th>
+		      <th scope="col" class="texto-registro descricao-registro">Descrição</th>
+		      <th scope="col" class="texto-registro">Data</th>
+		      <th scope="col" v-if="mostrarBotaoEdicao"></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<tr v-for="receita in receitas" v-if="receitaEditada != receita.id">
+			  		
+				    <td class="col-3 texto-registro valor-registro">R$ {{ receita.valor }}</td>
+			  		<td scope="row" class="texto-registro descricao-registro">{{ receita.descricao }}</td>
+				    <td class="col-2 texto-registro">{{receita.dataFormatada}}</td>
+				    
+			  		<td v-if="mostrarBotaoEdicao" class="botoes-editar-excluir">
+			  		
+	                   <button type="button" class="btn btn-danger" v-on:click="prepararExclusao(receita.id)"
+	                   data-toggle="modal" data-target="#modalReceitas">&#128465</button>
+		               <div th:replace="~{buttons/confirmar-exclusao :: receitas}"></div>
+		               
+		               <button type="button" class="btn btn-warning" v-on:click="inciarEdicao(receita)">&#9998</button>
+		               
+			  		</td>
+		    </tr>
+		    <tr v-else>
+		    	<td scope="row" colspan="4">
+		    		<div th:replace="~{formularios/editar-receita}"></div>
+		    	</td>
+		    </tr>
+		  </tbody>
+	</table>
+</div>

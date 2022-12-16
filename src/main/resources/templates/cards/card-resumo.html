@@ -1,0 +1,11 @@
+	<div  th:fragment="card-resumo" class="mt-2">
+		<div class="card-header alert-info">
+			<h1>Resumo do Mês</h1>
+		</div>
+		<div class="card-group valores-resumo d-flex">
+			<div class="card bg-light" v-for="valor in valoresResumo">
+				<p class="card-text valor-resumo">{{valor}}</p>
+			</div>
+		</div>
+		<div id="myChartGoogle"></div>
+	</div>

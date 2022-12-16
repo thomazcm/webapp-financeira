@@ -1,5 +1,5 @@
 @charset "UTF-8";
-
+[v-cloak] { display: none; }
 #titulo-home {
 	max-height: 11rem;
 }

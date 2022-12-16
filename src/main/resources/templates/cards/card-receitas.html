@@ -31,9 +31,9 @@
 		  <tbody>
 		  	<tr v-for="receita in receitas" v-if="receitaEditada != receita.id">
 			  		
-				    <td class="col-3 texto-registro valor-registro">R$ {{ receita.valor }}</td>
-			  		<td scope="row" class="texto-registro descricao-registro">{{ receita.descricao }}</td>
-				    <td class="col-2 texto-registro">{{receita.dataFormatada}}</td>
+				    <td class="col-3 texto-registro valor-registro" v-cloak>R$ {{ receita.valor }}</td>
+			  		<td scope="row" class="texto-registro descricao-registro" v-cloak>{{ receita.descricao }}</td>
+				    <td class="col-2 texto-registro" v-cloak>{{receita.dataFormatada}}</td>
 				    
 			  		<td v-if="mostrarBotaoEdicao" class="botoes-editar-excluir">
 			  		

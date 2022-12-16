@@ -31,9 +31,9 @@
 		  <tbody>
 		  	<tr v-for="despesa in despesas" v-if="despesaEditada != despesa.id">
 			  		
-				    <td class="col-3 texto-registro valor-registro">R$ {{ despesa.valor }}</td>
-			  		<td scope="row" class="texto-registro descricao-registro">{{ despesa.descricao }}</td>
-				    <td class="col-2 texto-registro">{{despesa.dataFormatada}}</td>
+				    <td class="col-3 texto-registro valor-registro" v-cloak>R$ {{ despesa.valor }}</td>
+			  		<td scope="row" class="texto-registro descricao-registro" v-cloak>{{ despesa.descricao }}</td>
+				    <td class="col-2 texto-registro" v-cloak>{{despesa.dataFormatada}}</td>
 				    
 			  		<td v-if="mostrarBotaoEdicao" class="botoes-editar-excluir">
 			  		

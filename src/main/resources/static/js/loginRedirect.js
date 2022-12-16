@@ -1,2 +1,2 @@
 sessionStorage.setItem('jwtToken', token);
-setTimeout(() => {window.location.assign('http://localhost:8080/home'); }, 500);
+setTimeout(() => {window.location.assign('https://webapp-financeira.herokuapp.com/home'); }, 500);

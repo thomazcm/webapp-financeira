@@ -182,10 +182,10 @@ function onLoad() {
 				axios
 					.post(`${apiEndpoint}/receitas`, new ReceitaDto(receitaForm))
 				 	.then(res => {
-                        this.resetForm(this.receitaForm);
                         this.getReceitas();
-                        this.receitasListKey++;
+                        this.receitasKey++;
                         resumo.atualizar();
+                        this.resetForm(this.receitaForm);
                         this.cancelarEdicao();
                 	})
 					.catch(error => {

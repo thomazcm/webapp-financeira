@@ -1,5 +1,7 @@
 package br.com.thomaz.springmvcfinanceira.controller;
 
+import java.util.List;
+import java.util.Random;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import br.com.thomaz.springmvcfinanceira.config.exception.EmailJaExisteException;
 import br.com.thomaz.springmvcfinanceira.controller.dto.UsuarioDto;
 import br.com.thomaz.springmvcfinanceira.controller.form.UsuarioForm;
+import br.com.thomaz.springmvcfinanceira.model.Usuario;
 import br.com.thomaz.springmvcfinanceira.repository.UsuarioRepository;
 import br.com.thomaz.springmvcfinanceira.service.ApiService;
 import br.com.thomaz.springmvcfinanceira.service.TokenService;
@@ -48,6 +51,21 @@ public class LoginController {
     @GetMapping("/cadastro")
     public String formularioCadastro(Model model, UsuarioForm usuarioForm) {
         return "cadastro";
+    }
+    
+    @GetMapping("/demo")
+    public String cadastroDemo() {
+        UsuarioForm demoForm = new UsuarioForm();
+        demoForm.setEmail("usuarioDemo" + new Random().nextInt(1, Integer.MAX_VALUE)
+                + "@mail.com");
+        demoForm.setNome("demo");
+        demoForm.setSenha("123456");
+        
+        Usuario usuarioDemo = demoForm.toUser(encoder);
+        repository.save(usuarioDemo);
+        http.doRequest(HttpMethod.POST, "/usuarios/demo", new UsuarioDto(usuarioDemo));
+        
+        return usuarioDemo.getUsername();
     }
 
     @PostMapping("/cadastro")

@@ -27,4 +27,8 @@
             <br>
             <a th:href="@{/login/cadastro}">Novo Usuário</a>
         </div>
+        <div th:if="${cadastrado} == null">
+            <br>
+            <a th:href="@{/login/demo}">Conta Demonstração</a>
+        </div>
 </div>

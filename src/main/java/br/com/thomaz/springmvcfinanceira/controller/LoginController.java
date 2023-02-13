@@ -1,6 +1,5 @@
 package br.com.thomaz.springmvcfinanceira.controller;
 
-import java.util.List;
 import java.util.Random;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import br.com.thomaz.springmvcfinanceira.config.exception.EmailJaExisteException;
 import br.com.thomaz.springmvcfinanceira.controller.dto.UsuarioDto;
 import br.com.thomaz.springmvcfinanceira.controller.form.UsuarioForm;
-import br.com.thomaz.springmvcfinanceira.model.Usuario;
 import br.com.thomaz.springmvcfinanceira.repository.UsuarioRepository;
 import br.com.thomaz.springmvcfinanceira.service.ApiService;
 import br.com.thomaz.springmvcfinanceira.service.TokenService;
@@ -34,11 +32,18 @@ public class LoginController {
     public String loginPage(Model model, 
             @RequestParam(required = false) Boolean cadastrado,
             @RequestParam(required = false) Boolean loginFail,
-            @RequestParam(required = false) Boolean erroToken) {
+            @RequestParam(required = false) Boolean erroToken,
+            @RequestParam(required = false) String usuarioCadastrado) {
         
         model.addAttribute("cadastrado", cadastrado);
         model.addAttribute("loginFail", loginFail);
         model.addAttribute("erroToken", erroToken);
+        model.addAttribute("usuarioCadastrado", usuarioCadastrado);
+        
+        if (cadastrado == null && usuarioCadastrado.length() > 1) {
+            model.addAttribute("senha", "123456");
+        }
+        
         return "login";
     }
     
@@ -56,16 +61,22 @@ public class LoginController {
     @GetMapping("/demo")
     public String cadastroDemo() {
         UsuarioForm demoForm = new UsuarioForm();
+        
         demoForm.setEmail("usuarioDemo" + new Random().nextInt(1, Integer.MAX_VALUE)
                 + "@mail.com");
+        while (repository.existsById(demoForm.getEmail())) {
+            demoForm.setEmail("usuarioDemo" + new Random().nextInt(1, Integer.MAX_VALUE)
+                    + "@mail.com");
+        }
         demoForm.setNome("demo");
         demoForm.setSenha("123456");
         
-        Usuario usuarioDemo = demoForm.toUser(encoder);
+        var usuarioDemo = demoForm.toUser(encoder);
         repository.save(usuarioDemo);
+        
         http.doRequest(HttpMethod.POST, "/usuarios/demo", new UsuarioDto(usuarioDemo));
         
-        return usuarioDemo.getUsername();
+        return "redirect:/login?usuarioCadastrado=" + demoForm.getEmail();
     }
 
     @PostMapping("/cadastro")
@@ -79,11 +90,11 @@ public class LoginController {
         
         var usuario = usuarioForm.toUser(encoder);
         var usuarioDto = new UsuarioDto(usuario);
-        
+
         var response = http.doRequest(HttpMethod.POST, "/usuarios", usuarioDto);
         if (response.statusCode() == 201) {
             repository.save(usuario);
-            return "redirect:/login?cadastrado=true";
+            return "redirect:/login?cadastrado=true&&usuarioCadastrado=" + usuarioForm.getEmail();
         }
         return "cadastro";
     }

@@ -40,7 +40,7 @@ public class LoginController {
         model.addAttribute("erroToken", erroToken);
         model.addAttribute("usuarioCadastrado", usuarioCadastrado);
         
-        if (cadastrado == null && usuarioCadastrado.length() > 1) {
+        if (cadastrado == null && usuarioCadastrado != null) {
             model.addAttribute("senha", "123456");
         }
         

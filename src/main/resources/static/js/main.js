@@ -135,7 +135,7 @@ function formatarData(data) {
 
 function onLoad() {
 	var tituloHome = new Vue({
-        el: '#tituloHome',
+        el: '#titulo-home',
         data: {
 			titulo : titulo,
 			mesAnteriorUrl: null,
@@ -395,7 +395,7 @@ function onLoad() {
         el: '#resumo',
         data: {
             valoresResumo: [],
-            zeroReceitas: false,
+            zeroReceitas: true,
             zeroDespesas: true,
             resumoKey: 0
         },

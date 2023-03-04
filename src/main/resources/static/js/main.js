@@ -313,7 +313,6 @@ function onLoad() {
                     })
             },
             editarDespesa(despesaEditForm, id){
-				console.log(id)
                 this.resetErrors(despesaEditForm);
                 axios
                     .put(`${apiEndpoint}/despesas/${id}`, new DespesaDto(despesaEditForm))
@@ -412,10 +411,9 @@ function onLoad() {
 					}
                     if (res.data.totalDespesas > 0) {
 						this.zeroDespesas = false;
+						const gastos = res.data.gastosPorCategoria;
+                    	this.gerarGrafico(gastos);
 					}
-					
-                    const gastos = res.data.gastosPorCategoria;
-                    this.gerarGrafico(gastos);
                 });
 			},
 			gerarGrafico(gastos) {

@@ -29,7 +29,7 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-		  	<tr v-for="despesa in despesas" v-if="despesaEditada != despesa.id">
+		  	<tr v-for="despesa in despesas" v-if="despesaEditada != despesa.id" v-cloak>
 			  		
 				    <td class="col-3 texto-registro valor-registro" v-cloak>R$ {{ despesa.valor }}</td>
 			  		<td scope="row" class="texto-registro descricao-registro" v-cloak>{{ despesa.descricao }}</td>
@@ -45,7 +45,7 @@
 		               
 			  		</td>
 		    </tr>
-		    <tr v-else>
+		    <tr v-else v-cloak>
 		    	<td scope="row" colspan="4">
 		    		<div th:replace="~{formularios/editar-despesa}"></div>
 		    	</td>

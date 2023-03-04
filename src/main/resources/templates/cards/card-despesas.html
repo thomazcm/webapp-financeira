@@ -1,5 +1,5 @@
 <div  th:fragment="card-despesas" class="mt-2">
- <div class="card-header alert-danger d-flex justify-content-between"> 
+ <div class="card-header alert-danger d-flex justify-content-between" v-cloak> 
  	 <div class="dropdown">
 	      <button class="btn btn-danger dropdown-toggle mt-2" type="button" id="dropdownMenuButton" data-toggle="dropdown"
 	          aria-haspopup="true" aria-expanded="false" v-on:click="botaoNovaDespesa()"> Nova Despesa </button>
@@ -13,7 +13,7 @@
       
 	  <button type="button" v-if="!mostrarBotaoEdicao" v-on:click="botaoEdicao(true)"
         class="btn btn-warning" style="height: 3rem;">&#9998</button>
-      <button type="button" v-else class="btn btn-secondary"  v-on:click="botaoEdicao(false)" v-cloak>
+      <button type="button" v-else class="btn btn-secondary"  v-on:click="botaoEdicao(false)">
           Cancelar
       </button>
   </div>

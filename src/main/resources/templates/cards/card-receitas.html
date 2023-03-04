@@ -13,7 +13,7 @@
       
 	  <button type="button" v-if="!mostrarBotaoEdicao" v-on:click="botaoEdicao(true)"
         class="btn btn-warning" style="height: 3rem;">&#9998</button>
-      <button type="button" v-else class="btn btn-secondary"  v-on:click="botaoEdicao(false)">
+      <button type="button" v-else class="btn btn-secondary"  v-on:click="botaoEdicao(false)" v-cloak>
           Cancelar
       </button>
   </div>

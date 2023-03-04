@@ -1,4 +1,5 @@
-	<div  th:fragment="card-resumo" class="mt-2">
+<div th:fragment="card-resumo" class="mt-2">
+	<div v-if="!zeroDespesas || !zeroReceitas" v-cloak>
 		<div class="card-header alert-info">
 			<h1>Resumo do Mês</h1>
 		</div>
@@ -7,5 +8,6 @@
 				<p class="card-text valor-resumo" v-cloak>{{valor}}</p>
 			</div>
 		</div>
-		<div id="myChartGoogle"></div>
+		<div v-if="!zeroDespesas" id="myChartGoogle"></div>
 	</div>
+</div>

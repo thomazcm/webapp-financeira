@@ -395,6 +395,8 @@ function onLoad() {
         el: '#resumo',
         data: {
             valoresResumo: [],
+            zeroReceitas: false,
+            zeroDespesas: true,
             resumoKey: 0
         },
         mounted() {
@@ -405,6 +407,13 @@ function onLoad() {
 				 axios.get(`${apiEndpoint}/resumo/${ano}/${mes}`)
                 .then(res => {
                     this.valoresResumo = gerarValoresResumo(res.data);
+                    if (res.data.totalReceitas > 0) {
+						this.zeroReceitas = false;
+					}
+                    if (res.data.totalDespesas > 0) {
+						this.zeroDespesas = false;
+					}
+					
                     const gastos = res.data.gastosPorCategoria;
                     this.gerarGrafico(gastos);
                 });

@@ -1,4 +1,4 @@
-<div th:fragment="~{cadastros/login}" class="card  ml-5" id="login-form">
+<div th:fragment="~{cadastros/login}" class="card  ml-4" id="login-form">
     <form th:action="@{/login}" class="card-body" method="post">
         <div class="form-group">
             <label for="username">E-mail</label>
@@ -8,8 +8,8 @@
 
         <div class="form-group">
             <label for="password">Senha</label>
-				<input name="password" type="password" class="form-control" 
-					placeholder="senha" th:value="${senha}"/>
+			<input name="password" type="password" class="form-control" 
+				placeholder="senha" th:value="${senha}"/>
         </div>
 
         <div th:if="${loginFail}" class="mb-2">
@@ -20,15 +20,16 @@
         </div>
 
         <button class="btn btn-primary" type="submit">Login</button>
-        <div th:if="${cadastrado}">
-            <small>Cadastro realizado com sucesso.<br> Faça login com seu email e senha.</small>
-        </div>
-        <div th:if="${cadastrado} == null">
-            <br>
-            <a th:href="@{/login/cadastro}">Novo Usuário</a>
-        </div>
-        <div th:if="${cadastrado} == null">
-            <br>
-            <a th:href="@{/login/demo}">Conta Demonstração</a>
-        </div>
+        
+        <div th:if="${cadastrado == null && senha == null}" class="d-flex justify-content-between mt-5">
+           	<a th:href="@{/login/cadastro}">Novo Usuário</a>
+           	<a th:href="@{/login/demo}" class="mb-2">Conta Demonstração</a>
+       	</div>
+        
+		<div th:if="${cadastrado}" class="alert alert-success mt-3" role="alert">
+			Cadastro realizado com sucesso.<br>Faça login o e-mail e senha cadastrados.
+		</div>
+		<div th:if="${senha}" class="alert alert-success mt-3" role="alert">
+			Usuário para demonstração criado.<br>Pressione login para entrar.
+		</div>
 </div>

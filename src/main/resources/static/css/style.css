@@ -18,6 +18,7 @@
 	margin-top: 3px;
     padding-right: 0rem;
     padding-left: 0rem;
+    font-size: 0.75rem;
 }
 
 #col-registros {
@@ -67,8 +68,10 @@
 }
 
 #cadastro-form {
-	width: 600px;
+	min-width: 450px;
+	max-width: 650px;
 }
+
 
 .error-message {
 	color: #ff0000;

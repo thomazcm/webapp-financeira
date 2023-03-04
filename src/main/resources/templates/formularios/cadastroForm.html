@@ -1,6 +1,6 @@
-<div th:fragment="cadastro" class="card mt-3" id="cadastro-form">
+<div th:fragment="cadastro" class="card mt-3 ml-2 mr-2" id="cadastro-form">
     <form th:object="${usuarioForm}" class="card-body" th:action="@{/login/cadastro}" method="POST">
-
+		
         <div th:if="${exception}" class="mb-2">
             <small th:text="${exception}" class="error-message"></small>
         </div>

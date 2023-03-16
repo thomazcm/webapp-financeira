@@ -27,7 +27,8 @@ public class DemoService {
     }
 
     public void limparUsuariosDemo(UsuarioRepository repository, ApiService http) {
-        List<Usuario> demosVelhos = repository.findByDataCriacaoLessThan(LocalDate.now().minusDays(2));
+        List<Usuario> demosVelhos = repository.findByDataCriacaoLessThanAndEhUsuarioDemoEquals
+                (LocalDate.now().minusDays(2), true);
         demosVelhos.forEach(d -> {
             var response = http.doRequest(HttpMethod.DELETE, "/usuarios/" + d.getUsername());
             if (response.statusCode() == 200) {

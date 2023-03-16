@@ -6,10 +6,11 @@ import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import br.com.thomaz.springmvcfinanceira.model.Usuario;
 
-public interface UsuarioRepository extends MongoRepository<Usuario, String>{
-    
+public interface UsuarioRepository extends MongoRepository<Usuario, String> {
+
     Optional<Usuario> findByEmail(String email);
 
-    List<Usuario> findByDataCriacaoLessThan(LocalDate data);
-
+    List<Usuario> findByDataCriacaoLessThanAndEhUsuarioDemoEquals(LocalDate data, Boolean ehDemo);
+    
+    
 }

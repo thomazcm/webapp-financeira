@@ -1,5 +1,6 @@
 package br.com.thomaz.springmvcfinanceira.controller.form;
 
+import java.time.LocalDate;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Length;
@@ -20,6 +21,7 @@ public class UsuarioForm {
         usuario.setNome(nome);
         usuario.setUsername(email);
         usuario.setPassword(encoder.encode(senha));
+        usuario.setDataCriacao(LocalDate.now());
         return usuario;
     }
 

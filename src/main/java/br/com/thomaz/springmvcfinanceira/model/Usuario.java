@@ -1,5 +1,6 @@
 package br.com.thomaz.springmvcfinanceira.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +17,30 @@ public class Usuario implements UserDetails {
     @Id 
     private String id;
     
+    private String email;
+    private String nome;
+    @JsonIgnore
+    private Collection<Perfil> perfis = new ArrayList<>();
+    @JsonIgnore private String senha;
+    @JsonIgnore private String token;
+    @JsonIgnore private LocalDateTime tokenExpiration;
+    private LocalDate dataCriacao;
+    private Boolean ehUsuarioDemo = false;
+    
+    
+    
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public Boolean getEhUsuarioDemo() {
+        return ehUsuarioDemo;
+    }
+
+    public void ehDemo() {
+        ehUsuarioDemo = true;
+    }
+    
     public String getId() {
         return id;
     }
@@ -23,14 +48,6 @@ public class Usuario implements UserDetails {
     public void setId(String id) {
         this.id = id;
     }
-
-    private String email;
-    private String nome;
-    @JsonIgnore
-    private Collection<Perfil> perfis = new ArrayList<>();
-    @JsonIgnore private String senha;
-    @JsonIgnore private String token;
-    @JsonIgnore LocalDateTime tokenExpiration;
 
     @Override
     public String getUsername() {
@@ -115,6 +132,10 @@ public class Usuario implements UserDetails {
         } catch (NullPointerException e) {
             return true;
         }
+    }
+
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
     }
 
 }

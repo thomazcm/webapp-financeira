@@ -341,13 +341,13 @@ function onLoad() {
 				idDespesa = this.despesaAExcluir;
               	axios
                   .delete(`${apiEndpoint}/despesas/${idDespesa}`)
-                  .then(this.sucessoExclusao())
+                  .then(res => this.sucessoExclusao())
                   .catch(error => {
                     if (error.request.status == 403) {
                         refreshToken();
                         axios
                             .delete(`${apiEndpoint}/despesas/${idDespesa}`)
-                            .then(this.sucessoExclusao())
+                            .then(res => {this.sucessoExclusao();})
                             .catch(error => {console.log(error);})
                     } else {
                         console.log(error);

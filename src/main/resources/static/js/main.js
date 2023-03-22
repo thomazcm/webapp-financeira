@@ -1,6 +1,6 @@
 axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('jwtToken')}`
 const apiEndpoint = 'https://rest-api-financeira.herokuapp.com';
-const localEndpoint = 'https://webapp-financeira.herokuapp.com/'
+const localEndpoint = 'https://webapp-financeira.herokuapp.com';
 
 
 class ReceitaDto {

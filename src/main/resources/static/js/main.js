@@ -324,7 +324,7 @@ function onLoad() {
                         this.cancelarEdicao();
                     })
                     .catch(error => {
-						displayErrors(error, despesaEditForm);
+						console.log(error)
                     })
             },
             excluirDespesa(){
@@ -338,24 +338,7 @@ function onLoad() {
                     this.cancelarEdicao();
                 	})
 	                .catch(error => {
-	                    axios.get(`${localEndpoint}/api/token`)
-                        .then(res => {
-                            sessionStorage.setItem('jwtToken', res.data);
-                        })
-                        .catch(err =>{
-                            console.log(err);
-                        });
-                        axios
-                        .delete(`${apiEndpoint}/despesas/${idDespesa}`)
-                        .then(res => {
-                            this.getDespesas();
-                            this.despesasListKey++;
-                            resumo.atualizar();
-                            this.cancelarEdicao();
-                            })
-                        .catch(error => {
-                            displayErrors(error, despesaEditForm);
-                        })
+	                    console.log(error)
                     })
             },
             prepararExclusao(id){

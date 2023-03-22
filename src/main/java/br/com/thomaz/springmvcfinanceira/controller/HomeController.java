@@ -2,11 +2,15 @@ package br.com.thomaz.springmvcfinanceira.controller;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import br.com.thomaz.springmvcfinanceira.service.TokenService;
 import br.com.thomaz.springmvcfinanceira.service.tables.Ano;
 import br.com.thomaz.springmvcfinanceira.service.tables.Categorias;
 import br.com.thomaz.springmvcfinanceira.service.tables.Mes;
@@ -14,6 +18,9 @@ import br.com.thomaz.springmvcfinanceira.service.tables.Mes;
 @Controller
 @RequestMapping("/home")
 public class HomeController {
+	
+	@Autowired
+	private TokenService tokenService;
     
     @GetMapping
     public String homeMesAtual(Model model) {
@@ -45,6 +52,7 @@ public class HomeController {
             model.addAttribute("listaMeses", Mes.listaDeMeses());
             model.addAttribute("listaAnos", Ano.listaDeAnos());
             model.addAttribute("listaCategorias", Categorias.lista());
+            model.addAttribute("token", tokenService.getToken());
             return true;
         } catch (NumberFormatException | DateTimeException e) {
             return false;

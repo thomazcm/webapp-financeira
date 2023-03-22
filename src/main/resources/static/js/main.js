@@ -133,7 +133,7 @@ function formatarData(data) {
 
 function tokenExpired(error) {
     if (error.request.status == 403) {
-        axios.get(`${apiEndpoint}/api/token`)
+        axios.get(`${localEndpoint}/api/token`)
         .then(res => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`
             return true;
@@ -303,7 +303,9 @@ function onLoad() {
                     despesa.dataFormatada = formatarData(despesa.data);
                     })
                 }
-                axios.get(url).then(res => success(res))
+                axios.get(url).then(res => {
+                    success(res);
+                })
                 .catch(error => {
                     if (tokenExpired(error)) {
                         axios.get(url).then(res => success(res))

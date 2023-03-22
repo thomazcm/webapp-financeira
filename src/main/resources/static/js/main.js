@@ -340,7 +340,7 @@ function onLoad() {
                 	})
 	                .catch(error => {
 	                    // console.log(error)
-                        axios.get(`${localEndpoint}/api`)
+                        axios.get(`${localEndpoint}/api/token`)
                         .then(res => {
                             sessionStorage.setItem('jwtToken', token);
                             axios
@@ -351,6 +351,9 @@ function onLoad() {
                                     resumo.atualizar();
                                     this.cancelarEdicao();
                                     })
+                                .catch(err => {
+                                    console.log(err)
+                                })
                             })
                     })
             },

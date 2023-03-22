@@ -224,7 +224,7 @@ function onLoad() {
                         axios.get(`${localEndpoint}/api/token`)
                         .then(res => {
                             axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
-                            axios.post(url, body).then(res => this.editarSuccess())
+                            axios.put(url, body).then(res => this.editarSuccess())
                             .catch(error => console.log(error));
                         })
                         .catch(error => console.log(error))
@@ -250,7 +250,7 @@ function onLoad() {
                         axios.get(`${localEndpoint}/api/token`)
                         .then(res => {
                             axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
-                            axios.post(url, body).then(res => this.excluirSuccess())
+                            axios.delete(url).then(res => this.excluirSuccess())
                             .catch(error => console.log(error));
                         })
                         .catch(error => console.log(error))

@@ -176,7 +176,6 @@ function onLoad() {
             this.getReceitas();
         },
         methods: {
-            methods: {
             getReceitas() {
                 url = `${apiEndpoint}/receitas/${ano}/${mes}`;
                 axios.get(url).then(res => this.getSuccess(res))

@@ -131,18 +131,21 @@ function formatarData(data) {
 	return `${dia}/${mes}`;
 }
 
-function refreshTokenAndRetry(requestMethod, requestPath, successMethod) {
-    axios
-        .get(`${localEndpoint}/api/token`)
-        .then(res => {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`
-            requestMethod(requestPath)
-              .then(res => successMethod())
-              .catch(error => console.log(error))
-        })
-        .catch(error => {
-            console.log(error)
-        });
+function axiosRequest(requestMethod, requestPath, successMethod, failMethod = console.log, secondRequest = false) {
+    requestMethod(requestPath)
+    .then(res => successMethod(res))
+    .catch(error => {
+        if (error.request.status == 403 && !secondRequest) {
+            axios.get(`${localEndpoint}/api/token`)
+            .then(res => {
+                axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
+                axiosRequest(requestMethod, requestPath, successMethod, failMethod, true)
+            })
+            .catch(error => console.log(error));
+        } else {
+            failMethod(error);
+        }
+    })
 }
 
 
@@ -298,15 +301,13 @@ function onLoad() {
         },
         methods: {
             getDespesas() {
-                axios.get(`${apiEndpoint}/despesas/${ano}/${mes}`)
-                .then(res => {
-                    this.despesas = res.data;
-                    this.despesas.forEach(despesa => {
-						despesa.dataFormatada = formatarData(despesa.data);
-					})
-                })
-                .catch(err =>{
-                    console.log(err);
+                requestPath = `${apiEndpoint}/despesas/${ano}/${mes}`;
+                axiosRequest(axios.get, requestPath, this.successGet)
+            },
+            successGet(res) {
+                this.despesas = res.data;
+                this.despesas.forEach(despesa => {
+                    despesa.dataFormatada = formatarData(despesa.data);
                 });
             },
             novaDespesa: function(despesaForm) {
@@ -341,19 +342,10 @@ function onLoad() {
                     })
             },
             excluirDespesa(){
-				idDespesa = this.despesaAExcluir;
-                deletePath = `${apiEndpoint}/despesas/${idDespesa}`;
-              	axios
-                  .delete(deletePath)
-                  .then(res => this.sucessoExclusao())
-                  .catch(error => {
-                    if (error.request.status == 403) {
-                        refreshTokenAndRetry(axios.delete, deletePath, this.sucessoExclusao)
-                    } else {
-                        console.log(error);
-                    }});
+                requestPath = `${apiEndpoint}/despesas/${this.despesaAExcluir}`;
+              	axiosRequest(axios.delete, requestPath, this.successDelete)
             },
-            sucessoExclusao(){
+            successDelete(){
                 this.getDespesas();
                 this.despesasListKey++;
                 resumo.atualizar();

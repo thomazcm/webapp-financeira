@@ -162,7 +162,7 @@ function onLoad() {
             receitaAExcluir: 0
         },
         mounted() {
-			axios.get(`${localEndpoint}/api`)
+			axios.get(`${localEndpoint}/api/token`)
 			.then(res => {
                     console.log(res.data)
                 })

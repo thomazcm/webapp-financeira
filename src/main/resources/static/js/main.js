@@ -131,23 +131,18 @@ function formatarData(data) {
 	return `${dia}/${mes}`;
 }
 
-function axiosRequest(requestMethod, requestPath, successMethod, failMethod = console.log, secondRequest = false) {
-    requestMethod(requestPath)
-    .then(res => successMethod(res))
-    .catch(error => {
-        if (error.request.status == 403 && !secondRequest) {
-            axios.get(`${localEndpoint}/api/token`)
-            .then(res => {
-                axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
-                axiosRequest(requestMethod, requestPath, successMethod, failMethod, true)
-            })
-            .catch(error => console.log(error));
-        } else {
-            failMethod(error);
-        }
-    })
+function tokenExpired(error) {
+    if (error.request.status == 403) {
+        axios.get(`${apiEndpoint}/api/token`)
+        .then(res => {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`
+            return true;
+        })
+        .catch (error => console.log(error));
+    } else {
+        return false
+    }
 }
-
 
 function onLoad() {
 	var tituloHome = new Vue({
@@ -301,29 +296,43 @@ function onLoad() {
         },
         methods: {
             getDespesas() {
-                requestPath = `${apiEndpoint}/despesas/${ano}/${mes}`;
-                function successGet() {
+                url = `${apiEndpoint}/despesas/${ano}/${mes}`;
+                function success(res) {
                     this.despesas = res.data;
                     this.despesas.forEach(despesa => {
-                        despesa.dataFormatada = formatarData(despesa.data);
+                    despesa.dataFormatada = formatarData(despesa.data);
                     })
                 }
-                axiosRequest(axios.get, requestPath, successGet);
+                axios.get(url).then(res => success(res))
+                .catch(error => {
+                    if (tokenExpired(error)) {
+                        axios.get(url).then(res => success(res))
+                        .catch(error => console.log(error));
+                    } else {
+                        console.log(error);
+                    }
+                })
             },
             novaDespesa: function(despesaForm) {
                 this.resetErrors(despesaForm);
-                axios
-                    .post(`${apiEndpoint}/despesas`, new DespesaDto(despesaForm))
-                     .then(res => {
-                        this.getDespesas();
-                        this.despesasKey++;
-                        resumo.atualizar();
-                        this.resetForm(this.despesaForm);
-                        this.cancelarEdicao()
-                    })
+                url = `${apiEndpoint}/despesas`;
+                body = new DespesaDto(despesaForm);
+                function success() {
+                    this.getDespesas();
+                    this.despesasKey++;
+                    resumo.atualizar();
+                    this.resetForm(this.despesaForm);
+                    this.cancelarEdicao();
+                }
+                axios.post(url, body).then(res => success())
                     .catch(error => {
-						console.log(error)
-						displayErrors(error, despesaForm);
+                        if (tokenExpired(error)){
+                            axios.post(url, body).then(res => success())
+                            .catch(error => console.log(error))
+                        } else {
+                            console.log(error)
+                            displayErrors(error, despesaForm);
+                        }
                     })
             },
             editarDespesa(despesaEditForm, id){
@@ -342,15 +351,24 @@ function onLoad() {
                     })
             },
             excluirDespesa(){
-                requestPath = `${apiEndpoint}/despesas/${this.despesaAExcluir}`;
-              	axiosRequest(axios.delete, requestPath, this.successDelete)
+                url = `${apiEndpoint}/despesas/${this.despesaAExcluir}`;
+                function success() {
+                    this.getDespesas();
+                    this.despesasListKey++;
+                    resumo.atualizar();
+                    this.cancelarEdicao();  
+                };
+                axios.delete(url).then(res => success())
+                .catch(error => {
+                    if (tokenExpired(error)){
+                        axios.delete(url).then(res => success())
+                        .catch(error => console.log(error))
+                    } else {
+                        console.log(error);
+                    }
+                })
             },
-            successDelete(){
-                this.getDespesas();
-                this.despesasListKey++;
-                resumo.atualizar();
-                this.cancelarEdicao();  
-            },
+            
             prepararExclusao(id){
 				this.despesaAExcluir = id;
 			},

@@ -162,13 +162,6 @@ function onLoad() {
             receitaAExcluir: 0
         },
         mounted() {
-			axios.get(`${localEndpoint}/api/token`)
-			.then(res => {
-                    console.log(res.data)
-                })
-                .catch(err =>{
-                    console.log(err);
-                });
             this.getReceitas();
         },
         methods: {
@@ -345,8 +338,25 @@ function onLoad() {
                     this.cancelarEdicao();
                 	})
 	                .catch(error => {
-	                    console.log(error);
-	                })
+	                    axios.get(`${localEndpoint}/api/token`)
+                        .then(res => {
+                            sessionStorage.setItem('jwtToken', res.data);
+                        })
+                        .catch(err =>{
+                            console.log(err);
+                        });
+                        axios
+                        .delete(`${apiEndpoint}/despesas/${idDespesa}`)
+                        .then(res => {
+                            this.getDespesas();
+                            this.despesasListKey++;
+                            resumo.atualizar();
+                            this.cancelarEdicao();
+                            })
+                        .catch(error => {
+                            displayErrors(error, despesaEditForm);
+                        })
+                    })
             },
             prepararExclusao(id){
 				this.despesaAExcluir = id;

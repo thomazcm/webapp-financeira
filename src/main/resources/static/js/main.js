@@ -297,22 +297,20 @@ function onLoad() {
         methods: {
             getDespesas() {
                 url = `${apiEndpoint}/despesas/${ano}/${mes}`;
-                function success(res) {
-                    this.despesas = res.data;
-                    this.despesas.forEach(despesa => {
-                    despesa.dataFormatada = formatarData(despesa.data);
-                    })
-                }
-                axios.get(url).then(res => {
-                    success(res);
-                })
+                axios.get(url).then(res => this.getSuccess(res))
                 .catch(error => {
                     if (tokenExpired(error)) {
-                        axios.get(url).then(res => success(res))
+                        axios.get(url).then(res => this.getSuccess(res))
                         .catch(error => console.log(error));
                     } else {
                         console.log(error);
                     }
+                })
+            },
+            getSuccess(res) {
+                this.despesas = res.data;
+                this.despesas.forEach(despesa => {
+                    despesa.dataFormatada = formatarData(despesa.data);
                 })
             },
             novaDespesa: function(despesaForm) {

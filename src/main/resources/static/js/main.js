@@ -135,7 +135,7 @@ function tokenExpired(error) {
     if (error.request.status == 403) {
         axios.get(`${localEndpoint}/api/token`)
         .then(res => {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`
+            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
             return true;
         })
         .catch (error => console.log(error));
@@ -198,18 +198,33 @@ function onLoad() {
                 this.resetErrors(receitaForm);
                 url = `${apiEndpoint}/receitas`;
                 body = new ReceitaDto(receitaForm);
-        
+
                 axios.post(url, body).then(res => this.novaSuccess())
                     .catch(error => {
-                        if (tokenExpired(error)){
-                            axios.post(url, body).then(res => this.novaSuccess())
+                        if (error.request.status == 403) {
+                            axios.get(`${localEndpoint}/api/token`).then(res => {
+                                axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
+                                axios.post(url, body).then(res => this.novaSuccess())
+                                .catch(error => console.log(error));
+                            })
                             .catch(error => console.log(error))
                         } else {
-                            console.log(error)
                             displayErrors(error, receitaForm);
                         }
                     })
-            },
+            }
+        
+                // axios.post(url, body).then(res => this.novaSuccess())
+                //     .catch(error => {
+                //         if (tokenExpired(error)){
+                //             axios.post(url, body).then(res => this.novaSuccess())
+                //             .catch(error => console.log(error))
+                //         } else {
+                //             console.log(error)
+                //             displayErrors(error, receitaForm);
+                //         }
+                //     })
+            ,
             novaSuccess() {
                 this.getReceitas();
                 this.receitasKey++;
@@ -242,10 +257,10 @@ function onLoad() {
             excluirReceita(){
                 url = `${apiEndpoint}/receitas/${this.receitaAExcluir}`;
                 
-                axios.delete(url).then(res => this.excluirSuccess)
+                axios.delete(url).then(res => this.excluirSuccess())
                 .catch(error => {
                     if (tokenExpired(error)){
-                        axios.delete(url).then(res => this.excluirSuccess)
+                        axios.delete(url).then(res => this.excluirSuccess())
                         .catch(error => console.log(error))
                     } else {
                         console.log(error);
@@ -372,7 +387,7 @@ function onLoad() {
                         axios.put(url, body).then(res => this.editarSuccess())
                         .catch(error => console.log(error))
                     } else {
-                        displayErrors(error);
+                        displayErrors(error, despesaEditForm);
                     }
                 })
             },
@@ -387,10 +402,10 @@ function onLoad() {
             excluirDespesa(){
                 url = `${apiEndpoint}/despesas/${this.despesaAExcluir}`;
                
-                axios.delete(url).then(res => this.excluirSuccess)
+                axios.delete(url).then(res => this.excluirSuccess())
                 .catch(error => {
                     if (tokenExpired(error)){
-                        axios.delete(url).then(res => this.excluirSuccess)
+                        axios.delete(url).then(res => this.excluirSuccess())
                         .catch(error => console.log(error))
                     } else {
                         console.log(error);

@@ -131,7 +131,16 @@ function formatarData(data) {
 	return `${dia}/${mes}`;
 }
 
-
+function refreshToken() {
+    axios
+        .get(`${localEndpoint}/api/token`)
+        .then(res => {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`
+        })
+        .catch(err => {
+            console.log(err)
+        });
+}
 
 
 function onLoad() {
@@ -332,30 +341,25 @@ function onLoad() {
 				idDespesa = this.despesaAExcluir;
               	axios
                   .delete(`${apiEndpoint}/despesas/${idDespesa}`)
-                  .then(res => {
-                    this.getDespesas();
-                    this.despesasListKey++;
-                    resumo.atualizar();
-                    this.cancelarEdicao();
-                	})
+                //   .then(res => {
+                //     this.getDespesas();
+                //     this.despesasListKey++;
+                //     resumo.atualizar();
+                //     this.cancelarEdicao();
+                // 	})
 	                .catch(error => {
-	                    // console.log(error)
-                        axios.get(`${localEndpoint}/api/token`)
-                        .then(res => {
-                            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`
+                        if (error.request.status == 403) {
+                            refreshToken();
                             axios
-                                .delete(`${apiEndpoint}/despesas/${idDespesa}`)
-                                .then(res => {
-                                    this.getDespesas();
-                                    this.despesasListKey++;
-                                    resumo.atualizar();
-                                    this.cancelarEdicao();
-                                    })
-                                .catch(err => {
-                                    console.log(err)
-                                })
-                            })
-                    })
+                              .delete(`${apiEndpoint}/despesas/${idDespesa}`)
+                              .catch(error => {console.log(error);})
+                        } else {
+                            console.log(error);
+                        }});
+                this.getDespesas();
+                this.despesasListKey++;
+                resumo.atualizar();
+                this.cancelarEdicao();    
             },
             prepararExclusao(id){
 				this.despesaAExcluir = id;

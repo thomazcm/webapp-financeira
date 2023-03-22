@@ -32,7 +32,7 @@ public class SecurityConfigurations {
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/login/redirect", true)
+                        .defaultSuccessUrl("/home", true)
                         .failureUrl("/login?loginFail=1")
                         .permitAll())
                 .logout(logout -> logout.logoutUrl("/logout"))

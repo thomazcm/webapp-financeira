@@ -1,6 +1,7 @@
 package br.com.thomaz.springmvcfinanceira.controller;
 
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,13 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import br.com.thomaz.springmvcfinanceira.config.exception.EmailJaExisteException;
 import br.com.thomaz.springmvcfinanceira.controller.dto.UsuarioDto;
 import br.com.thomaz.springmvcfinanceira.controller.form.UsuarioForm;
 import br.com.thomaz.springmvcfinanceira.repository.UsuarioRepository;
 import br.com.thomaz.springmvcfinanceira.service.ApiService;
 import br.com.thomaz.springmvcfinanceira.service.DemoService;
-import br.com.thomaz.springmvcfinanceira.service.TokenService;
 
 @Controller
 @RequestMapping(("/login"))
@@ -26,7 +27,6 @@ public class LoginController {
     @Autowired private UsuarioRepository repository;
     @Autowired private BCryptPasswordEncoder encoder;
     @Autowired private ApiService http;
-    @Autowired private TokenService tokenService;
     @Autowired private DemoService demoService;
 
     @GetMapping
@@ -45,12 +45,6 @@ public class LoginController {
         }
 
         return "login";
-    }
-
-    @GetMapping("/redirect")
-    public String loginRedirect(Model model) {
-        model.addAttribute("token", tokenService.getToken());
-        return "loginRedirect";
     }
 
     @GetMapping("/cadastro")

@@ -39,6 +39,18 @@ public abstract class Mes {
             meses.put(Month.DECEMBER, "Dezembro");
         }
     }
+
+	public static Object anterior(Integer ano, Integer mes) {
+		return String.format("%d/%d", 
+                mes == 1 ? ano-1 : ano,
+                mes == 1 ? 12 : mes-1);
+	}
+
+	public static Object proximo(Integer ano, Integer mes) {
+		return String.format("%d/%d", 
+                mes == 12 ? ano+1 : ano,
+                mes == 12 ? 1 : mes+1);
+	}
 }
 
 class MesObject{

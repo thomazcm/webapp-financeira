@@ -45,8 +45,8 @@ public class HomeController {
             model.addAttribute("ano", ano);
             model.addAttribute("mes", mes);
             model.addAttribute("mesNome", Mes.de(mes));
-            model.addAttribute("mesAnteriorUrl", calculaMesAnterior(ano, mes));
-            model.addAttribute("proximoMesUrl", calculaProximoMes(ano, mes));
+            model.addAttribute("mesAnteriorUrl", Mes.anterior(ano, mes));
+            model.addAttribute("proximoMesUrl", Mes.proximo(ano, mes));
             model.addAttribute("mesAnteriorNome", Mes.de(mes == 1 ? 12 : mes-1));
             model.addAttribute("proximoMesNome", Mes.de(mes == 12 ? 1 : mes+1));
             model.addAttribute("listaMeses", Mes.listaDeMeses());
@@ -57,17 +57,5 @@ public class HomeController {
         } catch (NumberFormatException | DateTimeException e) {
             return false;
         }
-    }
-
-    private String calculaMesAnterior(Integer ano, Integer mes) {
-        return String.format("%d/%d", 
-                mes == 1 ? ano-1 : ano,
-                mes == 1 ? 12 : mes-1);
-    }
-
-    private String calculaProximoMes(Integer ano, Integer mes) {
-        return String.format("%d/%d", 
-                mes == 12 ? ano+1 : ano,
-                mes == 12 ? 1 : mes+1);
     }
 }

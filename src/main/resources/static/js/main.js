@@ -341,25 +341,23 @@ function onLoad() {
 				idDespesa = this.despesaAExcluir;
               	axios
                   .delete(`${apiEndpoint}/despesas/${idDespesa}`)
-                //   .then(res => {
-                //     this.getDespesas();
-                //     this.despesasListKey++;
-                //     resumo.atualizar();
-                //     this.cancelarEdicao();
-                // 	})
-	                .catch(error => {
-                        if (error.request.status == 403) {
-                            refreshToken();
-                            axios
-                              .delete(`${apiEndpoint}/despesas/${idDespesa}`)
-                              .catch(error => {console.log(error);})
-                        } else {
-                            console.log(error);
-                        }});
+                  .then(this.sucessoExclusao())
+                  .catch(error => {
+                    if (error.request.status == 403) {
+                        refreshToken();
+                        axios
+                            .delete(`${apiEndpoint}/despesas/${idDespesa}`)
+                            .then(this.sucessoExclusao())
+                            .catch(error => {console.log(error);})
+                    } else {
+                        console.log(error);
+                    }});
+            },
+            sucessoExclusao(){
                 this.getDespesas();
                 this.despesasListKey++;
                 resumo.atualizar();
-                this.cancelarEdicao();    
+                this.cancelarEdicao();  
             },
             prepararExclusao(id){
 				this.despesaAExcluir = id;

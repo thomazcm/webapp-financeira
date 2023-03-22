@@ -122,7 +122,7 @@ public class Usuario implements UserDetails {
     
     public Usuario setToken(String token) {
         this.token = token;
-        this.tokenExpiration = LocalDateTime.now().plusMinutes(10);
+        this.tokenExpiration = LocalDateTime.now().plusSeconds(30);
         return this;
     }
 

@@ -342,7 +342,7 @@ function onLoad() {
 	                    // console.log(error)
                         axios.get(`${localEndpoint}/api/token`)
                         .then(res => {
-                            sessionStorage.setItem('jwtToken', token);
+                            sessionStorage.setItem('jwtToken', res.data);
                             axios
                                 .delete(`${apiEndpoint}/despesas/${idDespesa}`)
                                 .then(res => {

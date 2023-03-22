@@ -176,62 +176,89 @@ function onLoad() {
             this.getReceitas();
         },
         methods: {
+            methods: {
             getReceitas() {
-                axios.get(`${apiEndpoint}/receitas/${ano}/${mes}`)
-                .then(res => {
-                    this.receitas = res.data;
-                    this.receitas.forEach(receita => {
-						receita.dataFormatada = formatarData(receita.data);
-					})
+                url = `${apiEndpoint}/receitas/${ano}/${mes}`;
+                axios.get(url).then(res => this.getSuccess(res))
+                .catch(error => {
+                    if (tokenExpired(error)) {
+                        axios.get(url).then(res => this.getSuccess(res))
+                        .catch(error => console.log(error));
+                    } else {
+                        console.log(error);
+                    }
                 })
-                .catch(err =>{
-                    console.log(err);
-                });
             },
-			novaReceita: function(receitaForm) {
-				this.resetErrors(receitaForm);
-				axios
-					.post(`${apiEndpoint}/receitas`, new ReceitaDto(receitaForm))
-				 	.then(res => {
-                        this.getReceitas();
-                        this.receitasKey++;
-                        resumo.atualizar();
-                        this.resetForm(this.receitaForm);
-                        this.cancelarEdicao();
-                	})
-					.catch(error => {
-						displayErrors(error, receitaForm);
+            getSuccess(res) {
+                this.receitas = res.data;
+                this.receitas.forEach(receita => {
+                    receita.dataFormatada = formatarData(receita.data);
+                })
+            },
+            novaReceita: function(receitaForm) {
+                this.resetErrors(receitaForm);
+                url = `${apiEndpoint}/receitas`;
+                body = new ReceitaDto(receitaForm);
+        
+                axios.post(url, body).then(res => this.novaSuccess())
+                    .catch(error => {
+                        if (tokenExpired(error)){
+                            axios.post(url, body).then(res => this.novaSuccess())
+                            .catch(error => console.log(error))
+                        } else {
+                            console.log(error)
+                            displayErrors(error, receitaForm);
+                        }
                     })
-			},
-			editarReceita(receitaEditForm, id){
-				this.resetErrors(receitaEditForm);
-				axios
-					.put(`${apiEndpoint}/receitas/${id}`, new ReceitaDto(receitaEditForm))
-				 	.then(res => {
-						this.finalizarEdicao();
-						this.getReceitas();
-						this.receitasListKey++;
-						resumo.atualizar();
-						this.cancelarEdicao();
-                	})
-					.catch(error => {
-						displayErrors(error, receitaEditForm);
-                    })
-			},
-			excluirReceita(){
-                idReceita = this.receitaAExcluir;
-				axios
-					.delete(`${apiEndpoint}/receitas/${idReceita}`)
-				 	.then(res => {
-                    	this.getReceitas();
-						this.receitasListKey++;
-						resumo.atualizar();
-						this.cancelarEdicao();
-                	})
-					.catch(error => {
-						console.log(error);
-					})
-			},
+            },
+            novaSuccess() {
+                this.getReceitas();
+                this.receitasKey++;
+                resumo.atualizar();
+                this.resetForm(this.receitaForm);
+                this.cancelarEdicao();
+            },
+            editarReceita(receitaEditForm, id){
+                this.resetErrors(receitaEditForm);
+                url = `${apiEndpoint}/receitas/${id}`;
+                body = new ReceitaDto(receitaEditForm);
+                axios.put(url, body).then(res => this.editarSuccess())
+                .catch(error => {
+                    if (tokenExpired(error)){
+                        axios.put(url, body).then(res => this.editarSuccess())
+                        .catch(error => console.log(error))
+                    } else {
+                        displayErrors(error);
+                    }
+                })
+            },
+            editarSuccess(){
+                this.receitaEditada = null;
+                this.getReceitas();
+                this.receitasListKey++;
+                resumo.atualizar();
+                this.cancelarEdicao();
+            }
+            ,
+            excluirReceita(){
+                url = `${apiEndpoint}/receitas/${this.receitaAExcluir}`;
+                
+                axios.delete(url).then(res => this.excluirSuccess)
+                .catch(error => {
+                    if (tokenExpired(error)){
+                        axios.delete(url).then(res => this.excluirSuccess)
+                        .catch(error => console.log(error))
+                    } else {
+                        console.log(error);
+                    }
+                })
+            },
+            excluirSuccess(){
+                this.getReceitas();
+                this.receitasListKey++;
+                resumo.atualizar();
+                this.cancelarEdicao();  
+            },
             prepararExclusao(id){
 				this.receitaAExcluir = id;
 			},
@@ -317,17 +344,11 @@ function onLoad() {
                 this.resetErrors(despesaForm);
                 url = `${apiEndpoint}/despesas`;
                 body = new DespesaDto(despesaForm);
-                function success() {
-                    this.getDespesas();
-                    this.despesasKey++;
-                    resumo.atualizar();
-                    this.resetForm(this.despesaForm);
-                    this.cancelarEdicao();
-                }
-                axios.post(url, body).then(res => success())
+
+                axios.post(url, body).then(res => this.novaSuccess())
                     .catch(error => {
                         if (tokenExpired(error)){
-                            axios.post(url, body).then(res => success())
+                            axios.post(url, body).then(res => this.novaSuccess())
                             .catch(error => console.log(error))
                         } else {
                             console.log(error)
@@ -335,40 +356,55 @@ function onLoad() {
                         }
                     })
             },
+            novaSuccess() {
+                this.getDespesas();
+                this.despesasKey++;
+                resumo.atualizar();
+                this.resetForm(this.despesaForm);
+                this.cancelarEdicao();
+            },
             editarDespesa(despesaEditForm, id){
                 this.resetErrors(despesaEditForm);
-                axios
-                    .put(`${apiEndpoint}/despesas/${id}`, new DespesaDto(despesaEditForm))
-                     .then(res => {
-                        this.despesaEditada = null;
-                        this.getDespesas();
-                        this.despesasListKey++;
-                        resumo.atualizar();
-                        this.cancelarEdicao();
-                    })
-                    .catch(error => {
-						console.log(error)
-                    })
-            },
-            excluirDespesa(){
-                url = `${apiEndpoint}/despesas/${this.despesaAExcluir}`;
-                function success() {
-                    this.getDespesas();
-                    this.despesasListKey++;
-                    resumo.atualizar();
-                    this.cancelarEdicao();  
-                };
-                axios.delete(url).then(res => success())
+                url = `${apiEndpoint}/despesas/${id}`;
+                body = new DespesaDto(despesaEditForm);
+                axios.put(url, body).then(res => this.editarSuccess())
                 .catch(error => {
                     if (tokenExpired(error)){
-                        axios.delete(url).then(res => success())
+                        axios.put(url, body).then(res => this.editarSuccess())
+                        .catch(error => console.log(error))
+                    } else {
+                        displayErrors(error);
+                    }
+                })
+            },
+            editarSuccess(){
+                this.despesaEditada = null;
+                this.getDespesas();
+                this.despesasListKey++;
+                resumo.atualizar();
+                this.cancelarEdicao();
+            }
+            ,
+            excluirDespesa(){
+                url = `${apiEndpoint}/despesas/${this.despesaAExcluir}`;
+               
+                axios.delete(url).then(res => this.excluirSuccess)
+                .catch(error => {
+                    if (tokenExpired(error)){
+                        axios.delete(url).then(res => this.excluirSuccess)
                         .catch(error => console.log(error))
                     } else {
                         console.log(error);
                     }
                 })
             },
-            
+            excluirSuccess(){
+                this.getDespesas();
+                this.despesasListKey++;
+                resumo.atualizar();
+                this.cancelarEdicao();  
+            }
+            ,
             prepararExclusao(id){
 				this.despesaAExcluir = id;
 			},

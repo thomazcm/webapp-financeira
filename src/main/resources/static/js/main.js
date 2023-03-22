@@ -339,7 +339,19 @@ function onLoad() {
                     this.cancelarEdicao();
                 	})
 	                .catch(error => {
-	                    console.log(error)
+	                    // console.log(error)
+                        axios.get(`${localEndpoint}/api`)
+                        .then(res => {
+                            sessionStorage.setItem('jwtToken', token);
+                            axios
+                                .delete(`${apiEndpoint}/despesas/${idDespesa}`)
+                                .then(res => {
+                                    this.getDespesas();
+                                    this.despesasListKey++;
+                                    resumo.atualizar();
+                                    this.cancelarEdicao();
+                                    })
+                            })
                     })
             },
             prepararExclusao(id){

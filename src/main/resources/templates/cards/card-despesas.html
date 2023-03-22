@@ -17,40 +17,40 @@
           Cancelar
       </button>
   </div>
- 	<div class="lista-registros">
-		<table class="table table-bordered bg-light texto-tabela" :key="despesasListaKey"
-										v-bind:class="{'texto-menor':mostrarBotaoEdicao}">
-			  <thead>
-			    <tr class="header-tabela-despesas">
-			      <th scope="col" class="texto-registro valor-registro" >Valor</th>
-			      <th scope="col" class="texto-registro descricao-registro">Descrição</th>
-			      <th scope="col" class="texto-registro">Data</th>
-			      <th scope="col" v-if="mostrarBotaoEdicao"></th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			  	<tr v-for="despesa in despesas" v-if="despesaEditada != despesa.id" v-cloak>
-				  		
-					    <td class="col-3 texto-registro valor-registro" v-cloak>R$ {{ despesa.valor }}</td>
-				  		<td scope="row" class="texto-registro descricao-registro" v-cloak>{{ despesa.descricao }}</td>
-					    <td class="col-2 texto-registro" v-cloak>{{despesa.dataFormatada}}</td>
-					    
-				  		<td v-if="mostrarBotaoEdicao" class="botoes-editar-excluir">
-				  		
-		                   <button type="button" class="btn btn-danger" v-on:click="prepararExclusao(despesa.id)"
-		                   data-toggle="modal" data-target="#modalDespesas">&#128465</button>
-			               <div th:replace="~{buttons/confirmar-exclusao :: despesas}"></div>
-			               
-			               <button type="button" class="btn btn-warning" v-on:click="inciarEdicao(despesa)">&#9998</button>
-			               
-				  		</td>
-			    </tr>
-			    <tr v-else v-cloak>
-			    	<td scope="row" colspan="4">
-			    		<div th:replace="~{formularios/editar-despesa}"></div>
-			    	</td>
-			    </tr>
-			  </tbody>
-		</table>
-	</div>
+    <table class="table table-bordered bg-light texto-tabela" :key="despesasListaKey"
+                                    v-bind:class="{'texto-menor':mostrarBotaoEdicao}">
+            <thead>
+            <tr class="header-tabela-despesas">
+                <th scope="col" class="texto-registro valor-registro" >Valor</th>
+                <th scope="col" class="texto-registro descricao-registro">Descrição</th>
+                <th scope="col" class="texto-registro">Data</th>
+                <th scope="col" v-if="mostrarBotaoEdicao"></th>
+            </tr>
+            </thead>
+            <div class="lista-registros">
+                <tbody class="lista-registros">
+                    <tr v-for="despesa in despesas" v-if="despesaEditada != despesa.id" v-cloak>
+                        
+                        <td class="col-3 texto-registro valor-registro" v-cloak>R$ {{ despesa.valor }}</td>
+                        <td scope="row" class="texto-registro descricao-registro" v-cloak>{{ despesa.descricao }}</td>
+                        <td class="col-2 texto-registro" v-cloak>{{despesa.dataFormatada}}</td>
+                        
+                        <td v-if="mostrarBotaoEdicao" class="botoes-editar-excluir">
+                            
+                            <button type="button" class="btn btn-danger" v-on:click="prepararExclusao(despesa.id)"
+                            data-toggle="modal" data-target="#modalDespesas">&#128465</button>
+                            <div th:replace="~{buttons/confirmar-exclusao :: despesas}"></div>
+                            
+                            <button type="button" class="btn btn-warning" v-on:click="inciarEdicao(despesa)">&#9998</button>
+                            
+                        </td>
+                    </tr>
+                    <tr v-else v-cloak>
+                        <td scope="row" colspan="4">
+                            <div th:replace="~{formularios/editar-despesa}"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </div>
+    </table>
 </div>

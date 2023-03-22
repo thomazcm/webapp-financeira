@@ -347,8 +347,8 @@ function onLoad() {
                         refreshToken();
                         axios
                             .delete(`${apiEndpoint}/despesas/${idDespesa}`)
-                            .then(res => {this.sucessoExclusao();})
-                            .catch(error => {console.log(error);})
+                            .then(res => this.sucessoExclusao())
+                            .catch(error => console.log(error))
                     } else {
                         console.log(error);
                     }});

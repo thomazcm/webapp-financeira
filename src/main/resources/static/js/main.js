@@ -331,14 +331,7 @@ function onLoad() {
             getDespesas() {
                 url = `${apiEndpoint}/despesas/${ano}/${mes}`;
                 axios.get(url).then(res => this.getSuccess(res))
-                .catch(error => {
-                    if (tokenExpired(error)) {
-                        axios.get(url).then(res => this.getSuccess(res))
-                        .catch(error => console.log(error));
-                    } else {
-                        console.log(error);
-                    }
-                })
+                .catch(error => console.log(error));
             },
             getSuccess(res) {
                 this.despesas = res.data;
@@ -350,14 +343,18 @@ function onLoad() {
                 this.resetErrors(despesaForm);
                 url = `${apiEndpoint}/despesas`;
                 body = new DespesaDto(despesaForm);
-
+        
                 axios.post(url, body).then(res => this.novaSuccess())
                     .catch(error => {
-                        if (tokenExpired(error)){
-                            axios.post(url, body).then(res => this.novaSuccess())
+                        if (error.request.status == 403) {
+                            axios.get(`${localEndpoint}/api/token`)
+                            .then(res => {
+                                axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
+                                axios.post(url, body).then(res => this.novaSuccess())
+                                .catch(error => console.log(error));
+                            })
                             .catch(error => console.log(error))
                         } else {
-                            console.log(error)
                             displayErrors(error, despesaForm);
                         }
                     })
@@ -375,8 +372,13 @@ function onLoad() {
                 body = new DespesaDto(despesaEditForm);
                 axios.put(url, body).then(res => this.editarSuccess())
                 .catch(error => {
-                    if (tokenExpired(error)){
-                        axios.put(url, body).then(res => this.editarSuccess())
+                    if (error.request.status == 403) {
+                        axios.get(`${localEndpoint}/api/token`)
+                        .then(res => {
+                            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
+                            axios.put(url, body).then(res => this.editarSuccess())
+                            .catch(error => console.log(error));
+                        })
                         .catch(error => console.log(error))
                     } else {
                         displayErrors(error, despesaEditForm);
@@ -393,11 +395,16 @@ function onLoad() {
             ,
             excluirDespesa(){
                 url = `${apiEndpoint}/despesas/${this.despesaAExcluir}`;
-               
+                
                 axios.delete(url).then(res => this.excluirSuccess())
                 .catch(error => {
-                    if (tokenExpired(error)){
-                        axios.delete(url).then(res => this.excluirSuccess())
+                    if (error.request.status == 403) {
+                        axios.get(`${localEndpoint}/api/token`)
+                        .then(res => {
+                            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
+                            axios.delete(url).then(res => this.excluirSuccess())
+                            .catch(error => console.log(error));
+                        })
                         .catch(error => console.log(error))
                     } else {
                         console.log(error);
@@ -409,8 +416,7 @@ function onLoad() {
                 this.despesasListKey++;
                 resumo.atualizar();
                 this.cancelarEdicao();  
-            }
-            ,
+            },
             prepararExclusao(id){
 				this.despesaAExcluir = id;
 			},

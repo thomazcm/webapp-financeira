@@ -27,7 +27,7 @@
             <th scope="col" v-if="mostrarBotaoEdicao"></th>
         </tr>
         </thead>
-        <div class="lista-registros">
+        <div class="lista-registros overflow-auto">
             <tbody>
             <tr v-for="receita in receitas" v-if="receitaEditada != receita.id" v-cloak>
                     
@@ -42,7 +42,6 @@
                         <div th:replace="~{buttons/confirmar-exclusao :: receitas}"></div>
                         
                         <button type="button" class="btn btn-warning" v-on:click="inciarEdicao(receita)">&#9998</button>
-                        
                     </td>
             </tr>
             <tr v-else v-cloak>

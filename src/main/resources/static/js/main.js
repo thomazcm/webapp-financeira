@@ -301,14 +301,15 @@ function onLoad() {
         },
         methods: {
             getDespesas() {
-                requestPath = `${apiEndpoint}/despesas/${ano}/${mes}`;
-                axiosRequest(axios.get, requestPath, this.successGet)
-            },
-            successGet(res) {
-                this.despesas = res.data;
-                this.despesas.forEach(despesa => {
-                    despesa.dataFormatada = formatarData(despesa.data);
-                });
+                axiosRequest(
+                    axios.get, 
+                    `${apiEndpoint}/despesas/${ano}/${mes}`, 
+                    function(res) {
+                        this.despesas = res.data;
+                        this.despesas.forEach(despesa => {
+                        despesa.dataFormatada = formatarData(despesa.data);
+                    });
+                })
             },
             novaDespesa: function(despesaForm) {
                 this.resetErrors(despesaForm);

@@ -304,7 +304,7 @@ function onLoad() {
                 axiosRequest(
                     axios.get, 
                     `${apiEndpoint}/despesas/${ano}/${mes}`, 
-                    function(res) {
+                    function() {
                         this.despesas = res.data;
                         this.despesas.forEach(despesa => {
                         despesa.dataFormatada = formatarData(despesa.data);

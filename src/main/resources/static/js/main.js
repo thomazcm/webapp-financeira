@@ -162,6 +162,13 @@ function onLoad() {
             receitaAExcluir: 0
         },
         mounted() {
+			axios.get(`${localEndpoint}/api`)
+			.then(res => {
+                    console.log(res.data)
+                })
+                .catch(err =>{
+                    console.log(err);
+                });
             this.getReceitas();
         },
         methods: {

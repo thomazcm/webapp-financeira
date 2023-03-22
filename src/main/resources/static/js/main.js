@@ -179,14 +179,7 @@ function onLoad() {
             getReceitas() {
                 url = `${apiEndpoint}/receitas/${ano}/${mes}`;
                 axios.get(url).then(res => this.getSuccess(res))
-                .catch(error => {
-                    if (tokenExpired(error)) {
-                        axios.get(url).then(res => this.getSuccess(res))
-                        .catch(error => console.log(error));
-                    } else {
-                        console.log(error);
-                    }
-                })
+                .catch(error => console.log(error));
             },
             getSuccess(res) {
                 this.receitas = res.data;
@@ -202,7 +195,8 @@ function onLoad() {
                 axios.post(url, body).then(res => this.novaSuccess())
                     .catch(error => {
                         if (error.request.status == 403) {
-                            axios.get(`${localEndpoint}/api/token`).then(res => {
+                            axios.get(`${localEndpoint}/api/token`)
+                            .then(res => {
                                 axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
                                 axios.post(url, body).then(res => this.novaSuccess())
                                 .catch(error => console.log(error));
@@ -212,19 +206,7 @@ function onLoad() {
                             displayErrors(error, receitaForm);
                         }
                     })
-            }
-        
-                // axios.post(url, body).then(res => this.novaSuccess())
-                //     .catch(error => {
-                //         if (tokenExpired(error)){
-                //             axios.post(url, body).then(res => this.novaSuccess())
-                //             .catch(error => console.log(error))
-                //         } else {
-                //             console.log(error)
-                //             displayErrors(error, receitaForm);
-                //         }
-                //     })
-            ,
+            },
             novaSuccess() {
                 this.getReceitas();
                 this.receitasKey++;
@@ -238,11 +220,16 @@ function onLoad() {
                 body = new ReceitaDto(receitaEditForm);
                 axios.put(url, body).then(res => this.editarSuccess())
                 .catch(error => {
-                    if (tokenExpired(error)){
-                        axios.put(url, body).then(res => this.editarSuccess())
+                    if (error.request.status == 403) {
+                        axios.get(`${localEndpoint}/api/token`)
+                        .then(res => {
+                            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
+                            axios.post(url, body).then(res => this.editarSuccess())
+                            .catch(error => console.log(error));
+                        })
                         .catch(error => console.log(error))
                     } else {
-                        displayErrors(error);
+                        displayErrors(error, receitaEditForm);
                     }
                 })
             },
@@ -259,8 +246,13 @@ function onLoad() {
                 
                 axios.delete(url).then(res => this.excluirSuccess())
                 .catch(error => {
-                    if (tokenExpired(error)){
-                        axios.delete(url).then(res => this.excluirSuccess())
+                    if (error.request.status == 403) {
+                        axios.get(`${localEndpoint}/api/token`)
+                        .then(res => {
+                            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`;
+                            axios.post(url, body).then(res => this.excluirSuccess())
+                            .catch(error => console.log(error));
+                        })
                         .catch(error => console.log(error))
                     } else {
                         console.log(error);

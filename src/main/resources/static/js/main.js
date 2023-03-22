@@ -131,14 +131,17 @@ function formatarData(data) {
 	return `${dia}/${mes}`;
 }
 
-function refreshToken() {
+function refreshTokenAndRetry(requestMethod, requestPath, successMethod) {
     axios
         .get(`${localEndpoint}/api/token`)
         .then(res => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`
+            requestMethod(requestPath)
+              .then(res => successMethod())
+              .catch(error => console.log(error))
         })
-        .catch(err => {
-            console.log(err)
+        .catch(error => {
+            console.log(error)
         });
 }
 
@@ -339,16 +342,13 @@ function onLoad() {
             },
             excluirDespesa(){
 				idDespesa = this.despesaAExcluir;
+                deletePath = `${apiEndpoint}/despesas/${idDespesa}`;
               	axios
-                  .delete(`${apiEndpoint}/despesas/${idDespesa}`)
+                  .delete(deletePath)
                   .then(res => this.sucessoExclusao())
                   .catch(error => {
                     if (error.request.status == 403) {
-                        refreshToken();
-                        axios
-                            .delete(`${apiEndpoint}/despesas/${idDespesa}`)
-                            .then(res => this.sucessoExclusao())
-                            .catch(error => console.log(error))
+                        refreshTokenAndRetry(axios.delete, deletePath, this.sucessoExclusao)
                     } else {
                         console.log(error);
                     }});

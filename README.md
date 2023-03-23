@@ -40,7 +40,7 @@ O projeto foi desenvolvido em Java usando o framework Spring para o servidor, e 
 ## Acesso
   O aplicativo pode ser acessado pelo link: https://webapp-financeira.herokuapp.com/
   
-  Disponibiliza opções para cadastro de uma conta ou para criação de uma conta temporária rápida para demonstração, já com vários registros a fim de facilitar a demonstração.
+  Disponibiliza opções para cadastro ou para criação de uma conta temporária rápida para demonstração, já com vários registros a fim de facilitar a demonstração.
 ## Funcionalidades
 
 :heavy_check_mark: Cadastro e autenticação de usuários

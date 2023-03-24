@@ -4,6 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,11 @@ public class HomeController {
 	
 	@Autowired
 	private TokenService tokenService;
-    
+	@Value("${webapp-financeira.endpoint.apiEndpoint}")
+	private String apiEndpoint;
+	@Value("${webapp-financeira.endpoint.localEndpoint}")
+    private String localEndpoint;
+	
     @GetMapping
     public String homeMesAtual(Model model) {
         String mes = Integer.toString(LocalDate.now().getMonthValue());
@@ -44,6 +49,8 @@ public class HomeController {
             Integer mes = Integer.valueOf(mesString);
             model.addAttribute("ano", ano);
             model.addAttribute("mes", mes);
+            model.addAttribute("apiEndpoint", apiEndpoint);
+            model.addAttribute("localEndpoint", localEndpoint);
             model.addAttribute("mesNome", Mes.de(mes));
             model.addAttribute("mesAnteriorUrl", Mes.anterior(ano, mes));
             model.addAttribute("proximoMesUrl", Mes.proximo(ano, mes));

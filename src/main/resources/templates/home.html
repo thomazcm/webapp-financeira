@@ -8,6 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<div th:replace="~{base :: head('Webapp Finanças Pessoais')}"></div>
 	<script th:inline="javascript">
+		apiEndpoint = /*[[${apiEndpoint}]]*/
+		localEndpoint = /*[[${localEndpoint}]]*/
 		token = /*[[${token}]]*/
 		ano = /*[[${ano}]]*/ 
 		mes = /*[[${mes}]]*/

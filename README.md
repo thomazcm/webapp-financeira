@@ -62,7 +62,8 @@ Se o JWT expirar, o client-side envia um pedido ao servidor da aplicação web p
 ![gif edicao exlcusao](https://github.com/thomazcm/webapp-financeira/blob/master/github/edicao-exclusao.gif)
 
 
-#### :heavy_check_mark: Consulta de um resumo das despesas, receitas e saldo de cada mês do usuário 
+#### :heavy_check_mark: Exibição de um resumo das despesas por mês e por categoria, tanto como o total das receitas e o saldo final do mês
+![gif meses](https://github.com/thomazcm/webapp-financeira/blob/master/github/meses.gif)
 
 :heavy_check_mark: Geração de usuário demo temporário com despesas e receitas variadas já cadastradas para demonstração
 

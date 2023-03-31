@@ -1,4 +1,3 @@
-
 <a name="readme-top"></a>
 
 <h1>Webapp Finanças</h1> 
@@ -23,9 +22,9 @@
 
 :small_blue_diamond: [Funcionalidades](#funcionalidades)
 
-:small_blue_diamond: [Pré-Requisitos e como Rodar o Servidor](#pré-requisitos)
+:small_blue_diamond: [Executando o projeto](#executando-o-projeto)
 
-:small_blue_diamond: [Tecnologias](#tecnologias)
+:small_blue_diamond: [Tecnologias Utilizadas](#tecnologias)
 
 :small_blue_diamond: [Autor](#autor)
 
@@ -38,13 +37,13 @@ O projeto foi desenvolvido em Java usando o framework Spring para o servidor, e 
 ![home-screenshot](https://github.com/thomazcm/webapp-financeira/blob/master/github/home.png?raw=true)
 
 ## Acesso
-  O aplicativo pode ser acessado pelo link: https://webapp-financeira.herokuapp.com/
+  #### O aplicativo pode ser acessado pelo link: https://webapp-financeira.herokuapp.com/
   
   Disponibiliza opções para:
  - Cadastro de um novo usuário para que tenha seu próprio registro de despesas e receitas
  - Criação rápida de uma conta para demonstração temporária, já com diversos registros salvos
 
-Para hospedar o aplicativo localmente, é preciso que a API  back-end também esteja sendo executada, [as instruções podem ser encontradas aqui]().
+Para hospedar o aplicativo localmente, é preciso que a API  back-end também esteja sendo executada, [as instruções podem ser encontradas aqui](https://github.com/thomazcm/rest-api-financeira#pr%C3%A9-requisitos).
 
 Estando a API online, prossiga para os [próximos passos para executar o aplicativo web]().
 
@@ -64,6 +63,51 @@ Se o JWT expirar, o client-side envia um pedido ao servidor da aplicação web p
 #### :heavy_check_mark: Geração de usuário demo temporário com despesas e receitas variadas já cadastradas para demonstração
 
 ![gif demo](https://github.com/thomazcm/webapp-financeira/blob/master/github/gif-demo.gif)
+
+#### :heavy_check_mark: Layout responsivo para Desktop e Celulares
+
+![gif layout](https://github.com/thomazcm/webapp-financeira/blob/master/github/gif-layout.gif)
+
+<a name="readme-tt"></a>
+
+## Executando o projeto
+##### O aplicativo pode ser acessado pelo link: https://webapp-financeira.herokuapp.com/
+Caso queira hospedar uma versão localmente, siga os passos abaixo:
+
+#### Pré-requisitos
+- Para executar o servidor localmente, você precisa ter instalado as seguintes ferramentas: [JDK](https://www.java.com/pt-BR/download/), [Git](https://git-scm.com/) e [Maven](https://maven.apache.org/install.html).
+
+- Além disso, para que o aplicativo funcione corretamente, é preciso que a API de acesso ao banco de dados também esteja sendo executada.  [Você pode acessar o repositório da API e as intruções para executá-la aqui](https://github.com/thomazcm/rest-api-financeira#pr%C3%A9-requisitos).
+- Para que o banco de dados de autenticação do aplicativo funcione, [é preciso ter uma conta grauita no MongoDB Cloud](https://account.mongodb.com/account/register), que pode ser a mesma utilizada no servidor da API.
+
+#### Rodando o servidor do aplicativo web
+
+1. Clone este repositório
+```
+git clone https://github.com/thomazcm/webapp-financeira
+```
+2. Na página do [MongoDB Atlas](https://cloud.mongodb.com/), clique em "Browse Collections" e crie uma nova Database com o nome que deseja usar.
+
+3. Volte até a pagina inicial, clique em "Connect" e em seguida "Connect your Application". Salve a URI para se conectar ao seu banco de dados.
+
+4. Popule o arquivo env.properties na pasta raiz do repositório com as configurações do seu banco de dados:
+
+```
+DB_URI=
+DB_DATABASE=
+
+#DB_URI=Cole aqui a sua URI do MongoDB
+#DB_DATABASE=Nome da database que foi criada
+```
+
+6. Por fim, navegue na linha de comando até a raiz do projeto e execute o comando:
+```
+mvnw spring-boot:run
+
+## O servidor inciará na porta:8081 - acesse a página de login pelo navegador em <http://localhost:8081/login>
+```
+
+<p align="right">(<a href="#readme-top">voltar para o início</a>)</p>
 
 
 ## Licença

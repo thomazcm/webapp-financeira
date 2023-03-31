@@ -34,7 +34,7 @@ Aplicativo Web para controle de finanças pessoais dos usuários cadastrados. De
 O projeto foi desenvolvido em Java usando o framework Spring para o servidor, e Vue.js para a interface e comunicação client-side com a API.
 
 
-![home-screenshot](https://github.com/thomazcm/webapp-financeira/blob/master/github/home.png?raw=true)
+[![home-screenshot](https://github.com/thomazcm/webapp-financeira/blob/master/github/home.png?raw=true)](https://webapp-financeira.herokuapp.com/)
 
 ## Acesso
   #### O aplicativo pode ser acessado pelo link: https://webapp-financeira.herokuapp.com/

@@ -37,6 +37,7 @@ O projeto foi desenvolvido em Java usando o framework Spring para o servidor, e 
 
 [![home-screenshot](https://github.com/thomazcm/webapp-financeira/blob/master/github/home.png?raw=true)](https://webapp-financeira.herokuapp.com/)
 <p align="right">(<a href="#readme-top">voltar para o início</a>)</p>
+
 ## Acesso
   #### O aplicativo pode ser acessado pelo link: https://webapp-financeira.herokuapp.com/
   
@@ -50,6 +51,7 @@ Para hospedar o aplicativo localmente, é preciso que a API  back-end também es
 
 Estando a API online, prossiga para os [próximos passos para executar o aplicativo web]().
 <p align="right">(<a href="#readme-top">voltar para o início</a>)</p>
+
 ## Funcionalidades
 
 ####  :heavy_check_mark: Cadastro de Usuários e Autenticação Stateless  + Stateful
@@ -111,7 +113,6 @@ mvnw spring-boot:run
 ```
 
 <p align="right">(<a href="#readme-top">voltar para o início</a>)</p>
-
 
 ## Tecnologias Utilizadas
 As seguintes ferramentas foram usadas na construção do projeto

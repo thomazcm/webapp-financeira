@@ -72,6 +72,7 @@ Se o JWT expirar, o client-side envia um pedido ao servidor da aplicação web p
 ![gif layout](https://github.com/thomazcm/webapp-financeira/blob/master/github/gif-layout.gif)
 
 <p align="right">(<a href="#readme-top">voltar para o início</a>)</p>
+
 ## Executando o projeto
 ##### O aplicativo pode ser acessado pelo link: https://webapp-financeira.herokuapp.com/
 Caso queira hospedar uma versão localmente, siga os passos abaixo:
@@ -140,7 +141,7 @@ Este projeto esta sob a licença [MIT](./LICENSE). Consulte o arquivo LICENSE.md
 ## Autor
 <b>Thomaz Machado</b>🚀<br />
  <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/71472870?s=460&u=61b426b901b8fe02e12019b1fdb67bf0072d4f00&v=4" width="100px;" alt=""/><br />
-Projeto desenvolvido por Thomaz Machado 👊 Entre em contato!  
+Projeto desenvolvido por Thomaz Machado. Entre em contato!  
 
 [![Linkedin Badge](https://img.shields.io/badge/-Thomaz-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/tgmarinho/)](https://www.linkedin.com/in/tgmarinho/) 
 [![Gmail Badge](https://img.shields.io/badge/-thomazcm@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:thomazcm@gmail.com)](mailto:thomazcm@gmail.com)

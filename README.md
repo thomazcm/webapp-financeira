@@ -66,7 +66,7 @@ Se o JWT expirar, o client-side envia um pedido ao servidor da aplicação web p
 
 ![gif demo](https://github.com/thomazcm/webapp-financeira/blob/master/github/gif-demo.gif)
 
-#### :heavy_check_mark: Layout responsivo para Desktop e Celulares
+#### :heavy_check_mark: Layout responsivo para Desktop e Mobile
 
 ![gif layout](https://github.com/thomazcm/webapp-financeira/blob/master/github/gif-layout.gif)
 

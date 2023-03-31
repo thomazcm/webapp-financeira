@@ -43,6 +43,8 @@ O projeto foi desenvolvido em Java usando o framework Spring para o servidor, e 
  - Cadastro de um novo usuário para que tenha seu próprio registro de despesas e receitas
  - Criação rápida de uma conta para demonstração temporária, já com diversos registros salvos
 
+ #### Caso queira rodar o aplicativo localmente 
+  
 Para hospedar o aplicativo localmente, é preciso que a API  back-end também esteja sendo executada, [as instruções podem ser encontradas aqui](https://github.com/thomazcm/rest-api-financeira#pr%C3%A9-requisitos).
 
 Estando a API online, prossiga para os [próximos passos para executar o aplicativo web]().

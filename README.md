@@ -24,7 +24,7 @@
 
 :small_blue_diamond: [Executando o projeto](#executando-o-projeto)
 
-:small_blue_diamond: [Tecnologias Utilizadas](#tecnologias)
+:small_blue_diamond: [Tecnologias Utilizadas](#tecnologias-utilizadas)
 
 :small_blue_diamond: [Autor](#autor)
 
@@ -108,6 +108,25 @@ mvnw spring-boot:run
 ```
 
 <p align="right">(<a href="#readme-top">voltar para o início</a>)</p>
+
+
+## Tecnologias Utilizadas
+As seguintes ferramentas foram usadas na construção do projeto
+
+#### Tecnologias
+- [Spring Boot 2.7.2](https://spring.io/projects/spring-boot) - Framework
+- [Maven](https://maven.apache.org/) - Gerenciamento de Dependências
+- [Thymeleaf](https://www.thymeleaf.org/) - Gerenciamento de views e templates
+- [Boostrap 4](https://getbootstrap.com/) - Layout
+- [Vue.Js](https://vuejs.org/) - Interface do usuário
+
+#### Persistência e Deploy
+- [MongoDB Atlas](https://www.mongodb.com/atlas/database)
+- [Heroku](https://www.heroku.com/)
+
+#### Ferramentas
+- [Postman](https://www.postman.com/) - Testes de API
+- [Eclipse](https://www.eclipse.org/) e [VSCode](https://code.visualstudio.com/) - Editores de código
 
 
 ## Licença

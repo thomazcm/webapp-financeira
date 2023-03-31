@@ -34,7 +34,7 @@ Aplicativo Web para controle de finanças pessoais dos usuários cadastrados. De
   
 O repositório da API pode ser acessado em: https://github.com/thomazcm/rest-api-financeira
 
-O projeto foi desenvolvido em Java usando o framework Spring para o servidor, e Vue.js para a interface e comunicação client-side com a API.
+O projeto foi desenvolvido em Java usando o framework Spring com Thymeleaf para o servidor e gerenciamento das views, e Vue.js para a interface do usuário e comunicação client-side com a API.
 
 
 [![home-screenshot](https://github.com/thomazcm/webapp-financeira/blob/master/github/home.png?raw=true)](https://webapp-financeira.herokuapp.com/)

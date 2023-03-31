@@ -31,6 +31,8 @@
 
 ## Sobre o projeto 
 Aplicativo Web para controle de finanças pessoais dos usuários cadastrados. Desenvolvido para fornecer uma interface para as funcionalidades da [API REST](https://github.com/thomazcm/rest-api-financeira) que fornece o back-end para o funcionamento do aplicativo.
+  
+O repositório da API pode ser acessado em: https://github.com/thomazcm/rest-api-financeira
 
 O projeto foi desenvolvido em Java usando o framework Spring para o servidor, e Vue.js para a interface e comunicação client-side com a API.
 

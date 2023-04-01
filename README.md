@@ -34,7 +34,7 @@
 | :placard: Vitrine.Dev |     |
 | -------------  | --- |
 | :sparkles: Nome        | **Webapp Financeira**
-| :label: Tecnologias | spring, vuejs, bootstrap, MongoDB
+| :label: Tecnologias | Spring, VueJS, Bootstrap, MongoDB
 | :rocket: URL         |  https://webapp-financeira.herokuapp.com/
 
 

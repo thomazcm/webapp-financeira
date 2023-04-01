@@ -29,14 +29,14 @@
 
 :small_blue_diamond: [Autor](#autor)
 
-## Sobre o projeto 
-
 | :placard: Vitrine.Dev |     |
 | -------------  | --- |
 | :sparkles: Nome        | **Webapp Financeira**
 | :label: Tecnologias | Spring, VueJS, Bootstrap, MongoDB
 | :rocket: URL         |  https://webapp-financeira.herokuapp.com/
 
+
+## Sobre o projeto 
 
 Aplicativo Web para controle de finanças pessoais dos usuários cadastrados. Desenvolvido para fornecer uma interface para as funcionalidades da [API REST](https://github.com/thomazcm/rest-api-financeira) que fornece o back-end para o funcionamento do aplicativo.
   

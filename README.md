@@ -45,7 +45,7 @@ O repositório da API pode ser acessado em: https://github.com/thomazcm/rest-api
 O projeto foi desenvolvido em Java usando o framework Spring com Thymeleaf para o servidor e gerenciamento das views, e Vue.js para a interface do usuário e comunicação client-side com a API.
 
 
-[![home-screenshot](https://github.com/thomazcm/webapp-financeira/blob/master/github/home.png?raw=true#vitrinedev)](https://webapp-financeira.herokuapp.com/)
+[![home-screenshot](https://github.com/thomazcm/webapp-financeira/blob/master/github/home.png?raw=true)](https://webapp-financeira.herokuapp.com/)
 <p align="right">(<a href="#readme-top">voltar para o início</a>)</p>
 
 ## Acesso

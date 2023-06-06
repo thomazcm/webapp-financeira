@@ -16,7 +16,7 @@
   <img src="http://img.shields.io/static/v1?label=License&message=MIT&color=green&style=for-the-badge"/>
 
  
-  #### O aplicativo pode ser acessado pelo link: https://financeira.thomazcm.com
+  #### O aplicativo pode ser acessado pelo link: https://financeira.thomazcm.com/
   
 ### Tópicos 
 
@@ -36,7 +36,7 @@
 | -------------  | --- |
 | :sparkles: Nome        | **Webapp Financeira**
 | :label: Tecnologias | Spring, VueJS, Bootstrap, MongoDB
-| :rocket: URL         |  https://webapp-financeira.herokuapp.com/
+| :rocket: URL         |  https://financeira.thomazcm.com/
 
 
 ## Sobre o projeto 

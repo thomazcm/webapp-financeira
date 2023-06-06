@@ -142,8 +142,8 @@ As seguintes ferramentas foram usadas na construção do projeto
 - [Heroku](https://www.heroku.com/)
 
 #### Ferramentas
-- [Postman](https://www.postman.com/) - Testes de API
-- [Eclipse](https://www.eclipse.org/) e [VSCode](https://code.visualstudio.com/) - Editores de código
+- [Postman](https://www.postman.com/)
+- [Eclipse](https://www.eclipse.org/) e [VSCode](https://code.visualstudio.com/)
 
 <p align="right">(<a href="#readme-top">voltar para o início</a>)</p>
 

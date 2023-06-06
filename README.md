@@ -52,7 +52,7 @@ O projeto foi desenvolvido em Java usando o framework Spring com Thymeleaf para 
 <p align="right">(<a href="#readme-top">voltar para o início</a>)</p>
 
 ## Acesso
-  https://webapp-financeira.herokuapp.com/
+  https://financeira.thomazcm.com/
   
   Disponibiliza opções para:
  - Cadastro de um novo usuário para que tenha seu próprio registro de despesas e receitas

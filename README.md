@@ -89,7 +89,7 @@ Se o JWT expirar, o client-side envia um pedido ao servidor da aplicação web p
 <p align="right">(<a href="#readme-top">voltar para o início</a>)</p>
 
 ## Executando o projeto
-##### O aplicativo pode ser acessado pelo link: https://webapp-financeira.herokuapp.com/
+##### O aplicativo pode ser acessado pelo link: https://financeira.thomazcm.com
 Caso queira hospedar uma versão localmente, siga os passos abaixo:
 
 #### Pré-requisitos

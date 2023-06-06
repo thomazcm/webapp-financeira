@@ -132,10 +132,11 @@ As seguintes ferramentas foram usadas na construção do projeto
 
 #### Tecnologias
 - [Spring Boot 2.7.2](https://spring.io/projects/spring-boot) - Framework
+- [Vue.Js](https://vuejs.org/) - Interface do usuário
 - [Maven](https://maven.apache.org/) - Gerenciamento de Dependências
 - [Thymeleaf](https://www.thymeleaf.org/) - Gerenciamento de views e templates
 - [Boostrap 4](https://getbootstrap.com/) - Layout
-- [Vue.Js](https://vuejs.org/) - Interface do usuário
+
 
 #### Persistência e Deploy
 - [MongoDB Atlas](https://www.mongodb.com/atlas/database)
